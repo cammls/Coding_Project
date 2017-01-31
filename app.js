@@ -104,6 +104,11 @@ app.put('/api/users/:username/edit', function(req, res){
 
 
 // PIPEDRIVE REQUESTS
+app.post('/api/getdata', function(req, res){
+  // TODO post user ID here
+  var user_id = req.user_id
+  res.send()
+})
 
 app.listen(8080);
 console.log('Server listenning on port 8080');
