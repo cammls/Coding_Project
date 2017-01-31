@@ -1,0 +1,22 @@
+{
+  "name": "anne_passport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "express-session": "^1.15.0",
+    "neo4j": "^2.0.0-RC2",
+    "neo4j-driver": "^1.0.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+  }
+}
