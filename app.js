@@ -1,9 +1,10 @@
 var express        = require('express');
 var app            = express();
-var bodyParser = require('body-parser');
-var bcrypt = require('bcrypt-nodejs');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var bodyParser     = require('body-parser');
+var bcrypt         = require('bcrypt-nodejs');
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -16,25 +17,25 @@ var driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "ca
 var session = driver.session();
 //login !!
 app.post('/api/login', function(req, res){
-    console.log("1");
+  console.log("1");
   passport.use(new LocalStrategy(function(username, password, done) {
-      console.log("2");
-      session
-      .run("MATCH (u:User) WHERE u.username = {username} RETURN u", {username: req.body.username})
-      .then(function(result){
-        if (result == null){
-          return done(res.send("incorrect username"))
-          // return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (!bcrypt.compareSync(req.body.password, hash)) // true)
-        {
-          // return done(null, false, { message: 'Incorrect password.' });
-          return done(res.send("incorrect username"))
-        }
-      });
-        return done(null, user);
-    }
-  ))
+    console.log("2");
+    session
+    .run("MATCH (u:User) WHERE u.username = {username} RETURN u", {username: req.body.username})
+    .then(function(result){
+      if (result == null){
+        return done(res.send("incorrect username"))
+        // return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!bcrypt.compareSync(req.body.password, hash)) // true)
+      {
+        // return done(null, false, { message: 'Incorrect password.' });
+        return done(res.send("incorrect username"))
+      }
+    });
+    return done(null, user);
+  }
+))
 });
 // CRUD users routes
 //Create / Register
