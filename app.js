@@ -62,43 +62,51 @@ app.post('/api/users', function (req, res) {
 // List all users in json
 app.get('/api/users', function (req, res){
   session
-  // .run("MATCH (u:User) RETURN u") les deux marchent
-  .run("MATCH (u:User) RETURN u.username, u.email")
+   .run("MATCH (u:User) RETURN u")
   .then( function(result){
     res.json(result)
     session.close();
     driver.close();
   });
 });
-app.get('/api/users/:username', function(req,res){
+app.get('/api/users/:email', function(req,res){
   session
-  .run("MATCH (u:User) WHERE u.username = {username} RETURN u", {username: req.params.username})
+  .run("MATCH (u:User) WHERE u.email = {email} RETURN u", {username: req.params.email})
   .then( function(result){
     res.json(result)
     session.close();
-    driver.close();
+  })
+  .catch(function(error) {
+    res.send(error);
+    console.log(error);
   });
 });
 // delete a user
-app.delete('/api/users/:username/delete', function(req,res){
+app.delete('/api/users/:email/delete', function(req,res){
   session
-  .run("MATCH (u:User { username: {username} })DETACH DELETE u", {username: req.params.username})
+  .run("MATCH (u:User { email: {email} })DETACH DELETE u", {email: req.params.email})
   .then( function(){
     res.send("user deleted")
     session.close();
     driver.close();
+  })
+  .catch(function(error) {
+    res.send(error);
+    console.log(error);
   });
 });
 // EDIT USER
-app.put('/api/users/:username/edit', function(req, res){
-  session.run("MATCH (n:User { username: 'foo' })SET n.username = {username}, n.email = {email} RETURN n",
-  {username:req.body.username, email: req.body.email})
+app.put('/api/users/:email/edit', function(req, res){
+  session.run("MATCH (n:User { email: {email} })SET n.firstname = {firstname},n.lastname = {lastname}, n.email = {new_email} RETURN n",
+  {email: req.params.email, firstname:req.body.firstname,lastname:req.body.lastname, new_email: req.body.email})
   .then( function(result){
     res.json(result)
     session.close();
-    driver.close();
-
   })
+  .catch(function(error) {
+    res.send(error);
+    console.log(error);
+  });
 })
 // AUTHENTICATION WITH passport
 
