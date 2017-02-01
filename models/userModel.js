@@ -17,6 +17,7 @@ var logoutUser = function() {
 
 }
 
+// ===============================================================================
 // var register = function(req, res) {
 //   console.log(req.body)
 //   var user = new User()
@@ -35,7 +36,7 @@ var logoutUser = function() {
 //     });
 //   });
 // };
-
+// ===============================================================================
 // console.log(req.body)
 // passport.use(new LocalStrategy(function(username, password, done) {
 //     console.log("2");
@@ -55,8 +56,7 @@ var logoutUser = function() {
 //     return done(null, user);
 //   }
 // ))
-
-
+// ===============================================================================
 // passport.authenticate('local', function(err, user, info) {
 //   var token;
 //
@@ -74,6 +74,64 @@ var logoutUser = function() {
 //     res.status(401).json(info)
 //   }
 // })(req, res)
+// ===============================================================================
+// var hash = bcrypt.hashSync(req.body.password);
+// session
+// .run( "CREATE (:User {firstname: {firstname}, lastname: {lastname}, role: {role}, email: {email}, password: {password}})",
+// {firstname: req.body.firstname,lastname: req.body.lastname, email: req.body.email,role: req.body.role, password: hash })
+//
+// .then( function() {
+//   res.send('Account created');
+//   res.end();
+//   session.close();
+//   // driver.close();
+// })
+// .catch(function(error) {
+//   res.send(error);
+//   console.log(error);
+// });
+// ===============================================================================
+// session
+// .run("MATCH (u:User) RETURN u")
+// .then( function(result){
+//   res.json(result)
+//   session.close();
+//   driver.close();
+// });
+//   session
+// ===============================================================================
+// .run("MATCH (u:User) WHERE u.email = {email} RETURN u", {username: req.params.email})
+// .then( function(result){
+//   res.json(result)
+//   session.close();
+// })
+// .catch(function(error) {
+//   res.send(error);
+//   console.log(error);
+// });
+// ================================================================================
+// session
+// .run("MATCH (u:User { email: {email} })DETACH DELETE u", {email: req.params.email})
+// .then( function(){
+//   res.send("user deleted")
+//   session.close();
+//   driver.close();
+// })
+// .catch(function(error) {
+//   res.send(error);
+//   console.log(error);
+// });
+// ================================================================================
+// session.run("MATCH (n:User { email: {email} })SET n.firstname = {firstname},n.lastname = {lastname}, n.email = {new_email} RETURN n",
+// {email: req.params.email, firstname:req.body.firstname,lastname:req.body.lastname, new_email: req.body.email})
+// .then( function(result){
+//   res.json(result)
+//   session.close();
+// })
+// .catch(function(error) {
+//   res.send(error);
+//   console.log(error);
+// });
 
 exports.registerUser = registerUser
 exports.loginUser = loginUser
