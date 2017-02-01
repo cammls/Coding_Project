@@ -24,7 +24,7 @@ const GET_USERS = "users"
 const GET_USERS_CONNECTIONS = "usersConnections"
 
 var get_pipedrive_all_something = function(something, token) {
-  
+
 }
 
 var get_pipedrive_details_of_something = function(something, id, token) {

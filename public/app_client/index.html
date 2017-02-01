@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Twitter Mean</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/app_client/stylesheets/style.css">
+    <link rel="stylesheet" href="/app_client/stylesheets/navbar.css">
+    <link rel="stylesheet" href="/app_client/stylesheets/utilities.css">
+
+    <!-- JS -->
+    <script src="/vendors/angular/angular.min.js"></script>
+    <script src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/vendors/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/vendors/angular-bootstrap/ui-bootstrap.min.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
+    <script src="/app_client/app.js"></script>
+    <script src="/app_client/routes.js"></script>
+    <script src="/app_client/controllers/MainCtrl.js"></script>
+    <script src="/app_client/controllers/LoginCtrl.js"></script>
+    <script src="/app_client/controllers/RegisterCtrl.js"></script>
+    <script src="/app_client/controllers/ProfileCtrl.js"></script>
+    <script src="/app_client/controllers/NavigationCtrl.js"></script>
+    <script src="/app_client/services/AuthService.js"></script>
+    <script src="/app_client/services/DataService.js"></script>
+  </head>
+  <body ng-app="twitterMean">
+    <div ng-controller="mainController">
+        <div ng-include="'/app_client/views/shared/navbar.html'"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+            </div>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <div ui-view="navbar"></div>
+        <ui-view></ui-view>
+    <div>
+  </body>
+
+</html>
