@@ -3,18 +3,24 @@ var config    = require(path.join(__dirname, '../config/config.js'))
 var jwt       = require('jsonwebtoken')
 
 
-var generateJswt = function(id, email, first_name, last_name, role) {
+var generateJswt = function(user_data) {
   var expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
 
   return jwt.sign({
-    id: id,
-    email: email,
-    first_name: first_name,
-    last_name: last_name,
-    role: role,
+    id: user_data.id,
+    email: user_data.email,
+    first_name: user_data.first_name,
+    last_name: user_data.last_name,
+    role: user_data.role,
     exp: parseInt(expiry.getTime() / 1000),
   }, config.secret);
 }
 
+var decodeJswt = function(token) {
+  var decoded = jwt.verify(token, config.secret);
+  return decoded
+}
+
 exports.generateJswt = generateJswt
+exports.decodeJswt   = decodeJswt

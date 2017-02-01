@@ -6,7 +6,8 @@ var ctrlAuth      = require(path.join(__dirname, '../controllers/authenticationC
 // login
 
 userRoutes.post('/register', function(req, res){
-    ctrlAuth.register(req, res)
+    var user_data = req.body
+    ctrlAuth.register(user_data)
 });
 
 // CRUD users routes ===========================================================
@@ -34,7 +35,5 @@ userRoutes.delete('/users/:email/delete', function(req,res){
 userRoutes.put('/users/:email/edit', function(req, res){
 
 })
-
-// authenticate w/ passport
 
 module.exports = userRoutes

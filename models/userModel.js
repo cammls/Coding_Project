@@ -1,12 +1,14 @@
 var passport       = require('passport')
 var LocalStrategy  = require('passport-local').Strategy
 var path           = require('path')
-var jwt            = require('../services/generateJswt.js')
+var jwt            = require('../services/jswtService.js')
 var driver         = require('./connect_db.js').connectdb()
 var session        = driver.session()
 
-var registerUser = function() {
-
+var registerUser = function(user_data, callback) {
+  // IN USER DATA, USER ID MUST BE KNOWN
+  var token = jwt.generateJswt(user_data)
+  // callback (DO SOMETHING)
 }
 
 var loginUser = function() {
