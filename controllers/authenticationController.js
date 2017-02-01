@@ -1,4 +1,5 @@
 var passport  = require('passport')
+var LocalStrategy  = require('passport-local').Strategy
 var path      = require('path')
 var jwt       = require('../services/generateJswt.js')
 var user      = require('../models/userModel.js')
@@ -23,7 +24,7 @@ var user      = require('../models/userModel.js')
 // };
 
 var register = function(req, res) {
-  console.log(req)
+  console.log(req.body)
   passport.use(new LocalStrategy(function(username, password, done) {
       console.log("2");
       session

@@ -6,7 +6,6 @@ var bodyParser     = require('body-parser')
 var bcrypt         = require('bcrypt-nodejs')
 var path           = require('path')
 var passport       = require('passport')
-var LocalStrategy  = require('passport-local').Strategy
 var config         = require('./config/config.js')
 var passportConfig = require('./config/passport.js')
 
