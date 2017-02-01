@@ -1,13 +1,31 @@
-var passport       = require('passport')
-var LocalStrategy  = require('passport-local').Strategy
+// var passport       = require('passport')
+// var LocalStrategy  = require('passport-local').Strategy
 var path           = require('path')
 var jwt            = require('../services/jswtService.js')
 var driver         = require('./connect_db.js').connectdb()
 var session        = driver.session()
+var bcrypt         = require('bcrypt-nodejs')
 
 var registerUser = function(user_data, callback) {
   // IN USER DATA, USER ID MUST BE KNOWN
+  var hashed_pass = bcrypt.hashSync(user_data.password);
   var token = jwt.generateJswt(user_data)
+  // console.log(user_data)
+  // console.log(token)
+  session
+    .run( "CREATE (:User {firstname: {firstname}, lastname: {lastname}, role: {role}, email: {email}, password: {password}, token: {token}})",
+    {firstname: user_data.firstname,lastname: user_data.lastname, email: user_data.email,role: user_data.role, password: hashed_pass, token: token })
+
+   .then( function() {
+      res.send('Account created');
+      res.end();
+      session.close();
+      // driver.close();
+    })
+    .catch(function(error) {
+      res.send(error);
+      console.log(error);
+    });
   // callback (DO SOMETHING)
 }
 
