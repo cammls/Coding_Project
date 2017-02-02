@@ -7,14 +7,13 @@ var ctrlAuth      = require(path.join(__dirname, '../controllers/authenticationC
 
 userRoutes.post('/register', function(req, res){
     var user_data = req.body
-    ctrlAuth.register(user_data)
+    ctrlAuth.register(user_data, res)
 });
 
 // CRUD users routes ===========================================================
 
 // Create / Register
 userRoutes.post('/users', function (req, res) {
-
 
 });
 // List all users in json
