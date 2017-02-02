@@ -22,7 +22,7 @@ var userRoutes      = require('./routes/userRoutes.js')
 var companyRoutes	= require('./routes/companyRoutes.js')
 var apiQueriesRoute = require('./routes/apiQueriesRoute.js')
 
-//app.use('/api', companyRoutes)
+app.use('/api', companyRoutes)
 app.use('/api', userRoutes)
 app.use('/api', apiQueriesRoute)
 
