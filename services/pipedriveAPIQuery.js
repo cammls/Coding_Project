@@ -44,11 +44,12 @@ var get_pipedrive_data = function(params, token, callback) {
   .then(function(res) {
     console.log(res);
     callback('success', res.data)
-    return res.data;
+    // return res.data;
   })
   .catch(function(err) {
     console.log(err);
-    return err;
+    callback('error', res.data)
+    // return err;
   })
 }
 
