@@ -8,18 +8,15 @@ var bcrypt         = require('bcrypt-nodejs')
 
 var registerUser = function(user_data, callback) {
   var hashed_pass = bcrypt.hashSync(user_data.password)
-  var token = jwt.generateJswt(user_data)
-  // session
-  //   .run( "CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}, token: {token}})",
-  //     {firstname: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass, token: token })
-  // // callback (DO SOMETHING)
-  session.run( "CREATE (a:Person {name:'Rayed', title:'King'})" )
-                     .then(function(value) {
-   console.log(value)
-   console.log("SUCCESS")
-  }, function(reason) {
-  console.log(reason)
-});
+  // var token = jwt.generateJswt(user_data)
+  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}}) RETURN p",
+              {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass })
+         .then(function(result) {
+              console.log(result.records[0])
+              callback(result.records.keys)
+          }, function(reason) {
+              console.log(reason)
+          });
 
 }
 
