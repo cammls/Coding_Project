@@ -13,17 +13,23 @@ var create = function(company_data,callback){
 			});
 }
 
-var list = function list(){
+var list = function(){
 	 session.run("MATCH (c:Company) RETURN c")
-			.then( function(result){
-				res.json(result)
+			.then(function(res){
+				res.records.forEach(function(record){
+					console.log(record);
+				});
 				session.close();
-			}) 
+			});
+
 }
 
-var show = function show(id){
-	
+var show = function(id){
+	console.log("i'm in");
+	session.run("MATCH (c:Company) WHERE c.id ")
 }
+
 
 exports.create = create;
 exports.list = list;
+exports.show = show;

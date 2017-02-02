@@ -14,14 +14,13 @@ companyRoutes.post('/company/new', function (req, res) {
 
 // List
 companyRoutes.get('/companies', function (req, res){
-  console.log("hit me");
   ctrlCompany.list();
 });
 
 // Show one - WILL NOT WORK YET
 companyRoutes.get('/company/:id', function(req,res){
-  //company_profile = req.body.id;
-  //ctrlCompany.show(company_profile);
+  company_id = req.body.id;
+  ctrlCompany.show(company_id);
 });
 
 // Edit

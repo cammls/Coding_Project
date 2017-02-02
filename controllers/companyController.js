@@ -8,15 +8,14 @@ var create = function(company_data){
 }
 
 var list = function(){
-
-	res.end()
+	companyModel.list();
 }
 //Verifications
 //Appel au model
 
-var show
-//Verifications
-//Appel au model
+var show = function(company_data){
+	companyModel.show(company_data);
+}
 
 var edit
 //Verifications
