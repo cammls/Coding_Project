@@ -12,8 +12,23 @@ stripe.charges.list(
 var stripe_balance = function(res ,callback) {
   stripe.balance.retrieve( function(err, balance) {
     // asynchronously called
+    if (err)
+    console.log(err)
+
     callback(res,balance)
   });
   }
+
+  var stripe_customers = function(res, res2, callback){
+    stripe.customers.list(
+      function(err, customers) {
+        if (err)
+        console.log(err)
+        // asynchronously called
+        callback(res, res2, customers)
+      }
+    );
+  }
 exports.stripe_charges = stripe_charges
 exports.stripe_balance = stripe_balance
+exports.stripe_customers = stripe_customers
