@@ -1,78 +1,36 @@
 var express       = require('express')
-var companyRoutes    = express.Router()
+var companyRoutes = express.Router()
 var path          = require('path')
-var config        = require(path.join(__dirname, '../config/config.js'))
+var ctrlCompany   = require(path.join(__dirname, '../controllers/companyController.js'))
 
 //CRUD Company
 
 // Create
-companyRoutes.post('/company', function (req, res) {
-  session
-  .run( "CREATE (:Company {name: {name}, description: {description}, industry: {industry}})",
-  {name: req.body.name, description: req.body.description,industry: req.body.industry})
-
-  .then( function() {
-    res.send('Company created');
-    res.end();
-    session.close();
-
-  })
-  .catch(function(error) {
-    res.send(error);
-    console.log(error);
+companyRoutes.post('/company/new', function (req, res) {
+  //var company_data = req.body;
+  //ctrlCompany.create(company_data);
   });
 
-  // List
-  userRoutes.get('/companies', function (req, res){
-  session
-  .run("MATCH (c:Company) RETURN c")
-  .then( function(result){
-    res.json(result)
-    session.close();
-    driver.close();
-  });
+// List
+companyRoutes.get('/companies', function (req, res){
+  console.log("hit me");
+  //ctrlCompany.list();
 });
 
-  // Show one
-userRoutes.get('/company/:name', function(req,res){
-  session
-  .run("MATCH (c:Company) WHERE c.name = {name} RETURN c", {name: req.params.name})
-  .then( function(result){
-    res.json(result)
-    session.close();
-  })
-  .catch(function(error) {
-    res.send(error);
-    console.log(error);
-  });
+// Show one - WILL NOT WORK YET
+companyRoutes.get('/company/:id', function(req,res){
+  //company_profile = req.body.id;
+  //ctrlCompany.show(company_profile);
 });
 
- // Edit
- userRoutes.put('/company/:name/edit', function(req, res){
-  session.run("MATCH (c:Company { name: {name} })SET n.name = {name},n.description = {description}, n.industry = {industry} RETURN n",
-  {name: req.params.name, description:req.body.description,industry:req.body.industry})
-  .then( function(result){
-    res.json(result)
-    session.close();
-  })
-  .catch(function(error) {
-    res.send(error);
-    console.log(error);
-  });
+// Edit
+companyRoutes.put('/company/:id/edit', function(req, res){
+  //company_profile = req.body.id;
+  //ctrlCompany.edit(company_profile);
 })
 
- //Delete
- // delete a user
-userRoutes.delete('/users/:email/delete', function(req,res){
-  session
-  .run("MATCH (c:Company { name: {name} })DETACH DELETE c", {email: req.params.email})
-  .then( function(){
-    res.send("company deleted")
-    session.close();
-    driver.close();
-  })
-  .catch(function(error) {
-    res.send(error);
-    console.log(error);
-  });
+//Delete
+companyRoutes.delete('/users/:id/delete', function(req,res){
+  //company_to_delete = req.body.id;
+  //ctrlCompany.destroy(company_to_delete);
 });
