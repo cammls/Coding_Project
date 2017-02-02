@@ -3,8 +3,8 @@ var user    	 = require('../models/companyModel.js');
 var companyModel = require(path.join(__dirname,'../models/companyModel.js'));
 
 
-var create = function(params){
-	companyModel.create(params);
+var create = function(company_data){
+	companyModel.create(company_data);
 }
 
 var list = function(){
