@@ -3,13 +3,13 @@ var apiQueriesRoutes  = express.Router()
 var path              = require('path')
 var qryCtrl           = require('../controllers/queryController.js')
 
-
 // PIPEDRIVE REQUESTS
-apiQueriesRoutes.post('/getdata', function(req, res){
-  // // TODO post user ID here
-  // var user_token = req.token
-  // res.send("HELLO")
-  qryCtrl.getdata(req.body);
+apiQueriesRoutes.post('/fetchpipedrive', function(req, res){
+  console.log('ROUTE:');
+  console.log(req);
+  console.log(res);
+  console.log('======');
+  qryCtrl.prepareQuery(req, res);
 })
 
 module.exports = apiQueriesRoutes

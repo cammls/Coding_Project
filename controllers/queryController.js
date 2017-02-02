@@ -1,13 +1,19 @@
 var path             = require('path')
-// var user          = require('../models/userModel.js')
-// var jwt           = require('express-jwt')
-// var config        = require(path.join(__dirname, '../config/config.js'))
 var querySvc         = require('../services/pipedriveAPIQuery.js')
+var config           = require('../config/config.js')
 
-var getdata = function(params) {
-  console.log(params)
-  querySvc.get_pipedrive_all_something(params.token)
-  console.log('titi')
+var prepareQuery = function(req, res) {
+  // TODO -- QUERY API_TOKEN && VALIDATE QUERY PARAMS
+  // if () {
+  let token = config.pipedrivetoken
+  querySvc.get_pipedrive_data(req.body, token, function(service_response, data){
+    if ( service_response === 'success') {
+      res.send({ 'pipedrive_json' : data})
+    } else {
+      res.send({ 'error' : data})
+    }
+  })
+  // }
 }
 
-exports.getdata = getdata
+exports.prepareQuery = prepareQuery

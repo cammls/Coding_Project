@@ -9,12 +9,14 @@ var bcrypt         = require('bcrypt-nodejs')
 var registerUser = function(user_data, callback) {
   var hashed_pass = bcrypt.hashSync(user_data.password)
   // var token = jwt.generateJswt(user_data)
+  console.log(user_data);
   session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}}) RETURN p",
               {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass })
          .then(function(result) {
               console.log(result.records[0])
               callback(result.records.keys)
           }, function(reason) {
+            console.log('hello')
               console.log(reason)
           });
 
