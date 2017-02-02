@@ -7,7 +7,6 @@ var config        = require(path.join(__dirname, '../config/config.js'))
 
 // Create
 companyRoutes.post('/company', function (req, res) {
-  var hash = bcrypt.hashSync(req.body.password);
   session
   .run( "CREATE (:Company {name: {name}, description: {description}, industry: {industry}})",
   {name: req.body.name, description: req.body.description,industry: req.body.industry})
