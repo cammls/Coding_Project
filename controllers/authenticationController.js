@@ -1,70 +1,63 @@
-var passport  = require('passport')
-var LocalStrategy  = require('passport-local').Strategy
-var path      = require('path')
-var jwt       = require('../services/generateJswt.js')
-var user      = require('../models/userModel.js')
+var path          = require('path')
+var user          = require('../models/userModel.js')
+var test          = require('../services/jswtService.js')
+var config        = require(path.join(__dirname, '../config/config.js'))
 
-// var register = function(req, res) {
-//   console.log(req.body)
-//   var user = new User()
-//
-//   user.name = req.body.name;
-//   user.email = req.body.email;
-//
-//   user.setPassword(req.body.password)
-//   user.save(function(err) {
-//     if (err) throw err
-//     var token
-//     token = user.generateJswt()
-//     res.status(200)
-//     res.json({
-//       "token" : token
-//     });
-//   });
-// };
+// End of to authenticate user before action
 
-var register = function(req, res) {
-  console.log(req.body)
-  passport.use(new LocalStrategy(function(username, password, done) {
-      console.log("2");
-      session
-      .run("MATCH (u:User) WHERE u.username = {username} RETURN u", {username: req.body.username})
-      .then(function(result){
-        if (result == null){
-          return done(res.send("incorrect username"))
-          // return done(null, false, { message: 'Incorrect username.' });
-        }
-        if (!bcrypt.compareSync(req.body.password, hash)) // true)
-        {
-          // return done(null, false, { message: 'Incorrect password.' });
-          return done(res.send("incorrect username"))
-        }
-      });
-      return done(null, user);
-    }
-  ))
-}
-
-var login = function(req, res) {
-
-  passport.authenticate('local', function(err, user, info) {
-    var token;
-
-    if (err) {
-      res.status(404).json(err)
-      return;
-    }
-    if (user) {
-      token = user.generateJswt();
+var register = function(user_data, res) {
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!
+  user.registerUser(user_data, function(response, token) {
+    if (response === "success") {
       res.status(200)
       res.json({
-        "token" : token
-      })
-    } else {
-      res.status(401).json(info)
+        "token"   : token,
+        "success" : "Merci pour la création de votre compte !"
+      });
+    } else if (response === "failure" || token === "notoken") {
+      res.status(400)
+      res.json({
+        "error" : "Impossible de créer votre compte veuillez réessayer"
+      });
     }
-  })(req, res)
+  })
 }
 
-exports.register = register
-exports.login    = login
+var login = function(user_data, res) {
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!  
+  user.loginUser(user_data, function(response, token) {
+    if (response === "success") {
+      res.status(200)
+      res.json({
+        "token"   : token,
+        "success" : "Ravis de vous revoir !"
+      });
+    } else {
+      res.status(400)
+      res.json({
+        "error" : "Mauvaise combinaison email/mot de passe"
+      });
+    }
+  })
+}
+
+var logout = function(req, res) {
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!
+  user.logoutUser(user_data, function(response, token) {
+    if (response === "success") {
+      res.status(200)
+      res.json({
+        "success" : "Merci de votre visite et à bientôt !"
+      });
+    } else {
+      res.status(400)
+      res.json({
+        "error" : "Un problème technique est subvenu, corrigé dans l'heure"
+      });
+    }
+  })
+}
+
+exports.register  = register
+exports.login     = login
+exports.logout    = logout
