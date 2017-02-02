@@ -6,6 +6,7 @@ var session        = driver.session()
 var bcrypt         = require('bcrypt-nodejs')
 
 var registerUser = function(user_data, callback) {
+  // This is not a very secured way, should be hashed and salted
   var hashed_pass = bcrypt.hashSync(user_data.password)
   session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password} }) RETURN ID(p), p.first_name, p.last_name, p.email, p.role",
               {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass })
@@ -33,11 +34,24 @@ var registerUser = function(user_data, callback) {
 
 }
 
-var loginUser = function() {
-
+var loginUser = function(user_data, callback) {
+  // Find user corresponding to email
+  session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password", {email: user_data.email}).then(function(result) {
+    var stored_password = result.records[0]._fields[0]
+    if (bcrypt.compareSync(user_data.password, stored_password)) {
+      console.log("TODO NICE IF TRUE SHOULD BE LOGGED IN !!!")
+    }
+  }, function(reason) {
+      console.log(reason)
+  })
+  // Find its password
+  // Encrypt the password it entered
+  // Compare hashed passwords
+    // If matches then generate token send token and "success" to controller
+    // Else return it failed miserably
 }
 
-var logoutUser = function() {
+var logoutUser = function(token, callback) {
 
 }
 

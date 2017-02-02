@@ -23,12 +23,39 @@ var register = function(user_data, res) {
   })
 }
 
-var login = function(req, res) {
-
+var login = function(user_data, res) {
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!  
+  user.loginUser(user_data, function(response, token) {
+    if (response === "success") {
+      res.status(200)
+      res.json({
+        "token"   : token,
+        "success" : "Ravis de vous revoir !"
+      });
+    } else {
+      res.status(400)
+      res.json({
+        "error" : "Mauvaise combinaison email/mot de passe"
+      });
+    }
+  })
 }
 
 var logout = function(req, res) {
-
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!
+  user.logoutUser(user_data, function(response, token) {
+    if (response === "success") {
+      res.status(200)
+      res.json({
+        "success" : "Merci de votre visite et à bientôt !"
+      });
+    } else {
+      res.status(400)
+      res.json({
+        "error" : "Un problème technique est subvenu, corrigé dans l'heure"
+      });
+    }
+  })
 }
 
 exports.register  = register
