@@ -7,26 +7,20 @@ var session        = driver.session()
 var bcrypt         = require('bcrypt-nodejs')
 
 var registerUser = function(user_data, callback) {
-  // IN USER DATA, USER ID MUST BE KNOWN
-  var hashed_pass = bcrypt.hashSync(user_data.password);
+  var hashed_pass = bcrypt.hashSync(user_data.password)
   var token = jwt.generateJswt(user_data)
-  // console.log(user_data)
-  // console.log(token)
-  session
-    .run( "CREATE (:User {firstname: {firstname}, lastname: {lastname}, role: {role}, email: {email}, password: {password}, token: {token}})",
-    {firstname: user_data.firstname,lastname: user_data.lastname, email: user_data.email,role: user_data.role, password: hashed_pass, token: token })
+  // session
+  //   .run( "CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}, token: {token}})",
+  //     {firstname: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass, token: token })
+  // // callback (DO SOMETHING)
+  session.run( "CREATE (a:Person {name:'Rayed', title:'King'})" )
+                     .then(function(value) {
+   console.log(value)
+   console.log("SUCCESS")
+  }, function(reason) {
+  console.log(reason)
+});
 
-   .then( function() {
-      res.send('Account created');
-      res.end();
-      session.close();
-      // driver.close();
-    })
-    .catch(function(error) {
-      res.send(error);
-      console.log(error);
-    });
-  // callback (DO SOMETHING)
 }
 
 var loginUser = function() {

@@ -6,6 +6,7 @@ var ctrlAuth      = require(path.join(__dirname, '../controllers/authenticationC
 // login
 
 userRoutes.post('/register', function(req, res){
+
     var user_data = req.body
     ctrlAuth.register(user_data)
 });
