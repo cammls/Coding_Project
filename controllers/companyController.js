@@ -11,8 +11,10 @@ var list = function(){
 }
 
 var show = function(company_data,res){
-	companyModel.show(company_data);
-	res.json()
+	companyModel.show(company_data, function(response){
+		console.log(response);
+		res.send(response);
+	})
 }
 
 var edit = function(company_data){

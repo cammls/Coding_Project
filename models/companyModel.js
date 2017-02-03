@@ -16,7 +16,7 @@ var list = function(){
 	 session.run("MATCH (c:Company) RETURN c")
 			.then(function(res){
 				res.records.forEach(function(result){
-					console.log(result);
+					console.log(result.records);
 				});
 				session.close();
 			});
@@ -24,11 +24,10 @@ var list = function(){
 }
 
 var show = function(id,callback){
-	console.log("i'm in");
-	 session.run("MATCH (n:Company) RETURN { Name: n.name , Description: n.description } as Startup ORDER BY n.id LIMIT 5")
+	 session.run("MATCH (n:Company) RETURN { Name: n.name , Description: n.description } as Startup ORDER BY n.id LIMIT 1")
 			.then(function(res){
-				console.log(res.records[0]);
-				callback(res.records[0]);
+				console.log(JSON.stringify(res.records[0]));
+				callback(JSON.stringify(res.records[0]));
 			});
 }
 

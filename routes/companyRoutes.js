@@ -19,8 +19,8 @@ companyRoutes.get('/companies', function (req, res){
 
 // Show one - WILL NOT WORK YET
 companyRoutes.get('/company/:id', function(req,res){
-  company_id = req.body.id;
-  ctrlCompany.show(company_id);
+  company_id = req.params.id;
+  ctrlCompany.show(company_id,res);
 });
 
 // Edit
