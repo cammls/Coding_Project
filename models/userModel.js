@@ -75,8 +75,22 @@ var loginUser = function(user_data, callback) {
   })
 }
 
-var logoutUser = function(token, callback) {
-
+var logoutUser = function(user_data, callback) {
+  // CHECK IF THIS IS THE BEST SOLUTION TO FIND USER BY ID AFTER DECODING TOKEN
+  // ONE OTHER SOLUTION BEEING CHECK IF THERE IS A USER THAT HAS THIS GIVEN TOKEN
+  var token = user_data.token
+  console.log(token)
+  if (decoded = jwt.decodeJswt(token)) {
+    session.run("MATCH (n:User) WHERE ID(n) = {id} REMOVE n.token", {id: neo4j.int(decoded.id)}).then(function(result) {
+      callback("success", token)
+      session.close()
+    }, function(reason) {
+      callback("failure", "notoken")
+      session.close()
+    })
+  } else {
+    callback("failure", "wrongtoken")
+  }
 }
 
 exports.registerUser = registerUser
