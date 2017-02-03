@@ -12,11 +12,11 @@ apiQueriesRoutes.post('/getdata', function(req, res){
   // res.send("HELLO")
   qryCtrl.getdata(req.body);
 
-var stripeAPI         = require('../services/stripeAPIQuery.js')
+  var stripeAPI         = require('../services/stripeAPIQuery.js')
 
-// PIPEDRIVE REQUESTS
-apiQueriesRoutes.get('/stripe_data', function(req, res){
-  // TODO post user ID here
+  // PIPEDRIVE REQUESTS
+  apiQueriesRoutes.get('/stripe_data', function(req, res){
+    // TODO post user ID here
     stripeAPI.stripe_charges(function(charges) {
       stripeAPI.stripe_balance(charges, function(charges, balance) {
         stripeAPI.stripe_customers(charges, balance, function(charges, balance, customers){
@@ -25,7 +25,7 @@ apiQueriesRoutes.get('/stripe_data', function(req, res){
 
       });
     });
-
+  });
 })
 
-module.exports = apiQueriesRoutes
+  module.exports = apiQueriesRoutes

@@ -5,4 +5,11 @@ var list = function(res){
     res.json(response)
   })
 }
+var show = function(id, res){
+  user.showUser(id, function(response){
+    console.log(response)
+    res.json(response)
+  })
+}
 exports.list  = list
+exports.show  = show

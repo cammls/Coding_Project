@@ -84,15 +84,18 @@ var logoutUser = function(token, callback) {
  }
  var showUser = function(id, callback){
    session
-   .run()
+   .run("MATCH (u:User) WHERE ID(u) ={id} RETURN u",{id:  neo4j.int(id)})
    .then(function(result){
     // Completed!
     callback(result.records)
     session.close();
-
   })
+  .catch(function(error) {
+    console.log(error);
+  });
  }
 exports.registerUser = registerUser
 exports.loginUser = loginUser
 exports.logoutUser = logoutUser
 exports.getUsers = getUsers
+exports.showUser = showUser
