@@ -31,12 +31,12 @@ var registerUser = function(user_data, callback) {
               callback("failure", "notoken")
               session.close()
           });
-
 }
 
 var loginUser = function(user_data, callback) {
   // Find user corresponding to email
-  session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password", {email: user_data.email}).then(function(result) {
+  session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password", {email: user_data.email})
+  .then(function(result) {
     var stored_password = result.records[0]._fields[0]
     if (bcrypt.compareSync(user_data.password, stored_password)) {
       console.log("TODO NICE IF TRUE SHOULD BE LOGGED IN !!!")
@@ -54,7 +54,45 @@ var loginUser = function(user_data, callback) {
 var logoutUser = function(token, callback) {
 
 }
+//  TO CONTINUE LATER
+ // var tieUsertoCompany = function(user_id, company_id)
+ // {
+ //   session.run("MATCH (u:User) WHERE ID(u)= {user_id}, (c:Company) WHERE ID(c) = {company_id} CREATE (u)-[:BELONGS_TO]->(c) RETURN u,c", {user_id: neo4j.int(user_id), company_id: neo4j.int(company_id)})
+ //   .then(function(result){
+ //     result.records.forEach(function(record) {
+ //       console.log(record._fields);
+ //     });
+ //     // Completed!
+ //     session.close();
+ //   })
+ //   .catch(function(error) {
+ //     console.log(error);
+ //   });
+ // }
+ var getUsers = function(callback){
+   session
+   .run("MATCH (u:User) RETURN u")
+   .then(function(result){
+    // Completed!
+    callback(result.records)
+    session.close();
 
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
+ var showUser = function(id, callback){
+   session
+   .run()
+   .then(function(result){
+    // Completed!
+    callback(result.records)
+    session.close();
+
+  })
+ }
 exports.registerUser = registerUser
 exports.loginUser = loginUser
 exports.logoutUser = logoutUser
+exports.getUsers = getUsers
