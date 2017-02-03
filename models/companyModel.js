@@ -5,7 +5,6 @@ var create = function(company_data,callback){
 	session.run("CREATE(c:Company {name: {name}, description: {description}, industry: {industry}}) RETURN c",
 		{name: company_data.name, description: company_data.description, industry:company_data.industry})
 			.then(function(res){
-				console.log("Success");
 				console.log(res.records[0]);
 				callback(res.records.keys);
 			},function(reason){
@@ -16,20 +15,34 @@ var create = function(company_data,callback){
 var list = function(){
 	 session.run("MATCH (c:Company) RETURN c")
 			.then(function(res){
-				res.records.forEach(function(record){
-					console.log(record);
+				res.records.forEach(function(result){
+					console.log(result);
 				});
 				session.close();
 			});
 
 }
 
-var show = function(id){
+var show = function(id,callback){
 	console.log("i'm in");
-	session.run("MATCH (c:Company) WHERE c.id ")
+	 session.run("MATCH (n:Company) RETURN { Name: n.name , Description: n.description } as Startup ORDER BY n.id LIMIT 5")
+			.then(function(res){
+				console.log(res.records[0]);
+				callback(res.records[0]);
+			});
+}
+
+var edit = function(id){
+	console.log("changeme");
+}
+
+var destroy = function(id){
+	console.log("killme");
 }
 
 
 exports.create = create;
 exports.list = list;
 exports.show = show;
+exports.edit = edit;
+exports.destroy = destroy;

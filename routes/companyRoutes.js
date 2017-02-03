@@ -25,14 +25,14 @@ companyRoutes.get('/company/:id', function(req,res){
 
 // Edit
 companyRoutes.put('/company/:id/edit', function(req, res){
-  //company_profile = req.body.id;
-  //ctrlCompany.edit(company_profile);
+  company_id = req.body.id;
+  ctrlCompany.edit(company_id);
 })
 
 //Delete
-companyRoutes.delete('/users/:id/delete', function(req,res){
-  //company_to_delete = req.body.id;
-  //ctrlCompany.destroy(company_to_delete);
+companyRoutes.delete('/company/:id/delete', function(req,res){
+  company_to_delete = req.body.id;
+  ctrlCompany.destroy(company_to_delete);
 });
 
 module.exports = companyRoutes
