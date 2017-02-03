@@ -16,7 +16,7 @@ userRoutes.post('/register', function(req, res){
 userRoutes.post('/login', function (req, res) {
   var user_data = req.body  
   ctrlAuth.login(user_data, res)
-});
+})
 
 // Logout
 
