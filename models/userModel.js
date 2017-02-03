@@ -94,8 +94,21 @@ var logoutUser = function(token, callback) {
     console.log(error);
   });
  }
+ var deleteUser = function(id, callback){
+   session
+   .run("MATCH (u:User) WHERE ID(u) ={id} DELETE u",{id:  neo4j.int(id)})
+   .then(function(){
+    // Completed!
+    callback()
+    session.close();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
 exports.registerUser = registerUser
 exports.loginUser = loginUser
 exports.logoutUser = logoutUser
 exports.getUsers = getUsers
 exports.showUser = showUser
+exports.deleteUser = deleteUser

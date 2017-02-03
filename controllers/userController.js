@@ -7,9 +7,14 @@ var list = function(res){
 }
 var show = function(id, res){
   user.showUser(id, function(response){
-    console.log(response)
     res.json(response)
+  })
+}
+var delete_ = function(id, res){
+  user.deleteUser(id, function(){
+    res.send("user deleted")
   })
 }
 exports.list  = list
 exports.show  = show
+exports.delete_  = delete_

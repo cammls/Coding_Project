@@ -41,7 +41,8 @@ userRoutes.get('/users/:id', function(req,res){
 // delete a user
 
 userRoutes.delete('/users/:id/delete', function(req,res){
-
+  var id= req.params.id
+    ctrlUsers.delete_(id, res)
 });
 
 // edit users
