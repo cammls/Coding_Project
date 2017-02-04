@@ -1,4 +1,4 @@
 node_modules
-public/assets/vendors
+public/assets/vendor
 config/config.js
 *.log
