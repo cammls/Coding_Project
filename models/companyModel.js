@@ -37,17 +37,17 @@ var show = function(id,callback){
 			});
 }
 
-var edit = function(id){
-	console.log("changeme");
+var edit = function(id,params,callback){
+	 session.run("MATCH(n:Company) WHERE ID(n)={id} SET n.name={name}, n.description={description}, n.industry={industry}", {id: neo4j.int(id),name: params.name, description: params.description, industry: params.industry})
+	 		.then(function(result){
+	 			console.log('edited successfully');
+	 			callback.end()
+	 		})
 }
 
-var destroy = function(id){
-	console.log("killme");
-}
 
 
 exports.create = create;
 exports.list = list;
 exports.show = show;
 exports.edit = edit;
-exports.destroy = destroy;

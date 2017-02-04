@@ -18,16 +18,12 @@ var show = function(company_data,res){
 	})
 }
 
-var edit = function(company_data){
-	companyModel.edit(company_data,res);
+var edit = function(id,new_data,res){
+	companyModel.edit(id,new_data,res);
 }
 
-var destroy = function(company_data){
-	companyModel.destroy(company_data,res);
-}
 
 exports.list = list
 exports.create = create
 exports.show = show
 exports.edit = edit
-exports.destroy = destroy
