@@ -1,0 +1,31 @@
+{
+  "name": "mpcc_api",
+  "homepage": "https://github.com/Peutra/rails_angular",
+  "authors": [
+    "Benoit Nguyen"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.4.0",
+    "angular-materialize": "^0.2.2",
+    "font-awesome": "^4.7.0",
+    "angular-local-storage": "^0.5.2",
+    "angular-jwt": "^0.1.9",
+    "cloudinary_ng": "^2.1.1",
+    "angular-upload": "^1.0.12",
+    "angular-file-upload": "^2.4.1",
+    "angular-hovercard": "^1.0.4",
+    "underscore": "^1.8.3"
+  }
+}
