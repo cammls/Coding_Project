@@ -1,16 +1,16 @@
 app.factory('authService',  ['$http', '$window', function($http, $window) {
 
     var saveToken = function (token) {
-      localStorage['mpcc-token'] = token;
+      localStorage['coding-project'] = token
     };
 
     var getToken = function () {
-      return localStorage['mpcc-token'];
+      return localStorage['coding-project']
     };
 
     var isLoggedIn = function() {
-      var token = getToken();
-      var payload;
+      var token = getToken()
+      var payload
       if(token){
         payload = token.split('.')[1];
         payload = atob(payload);
@@ -29,10 +29,11 @@ app.factory('authService',  ['$http', '$window', function($http, $window) {
         payload = atob(payload);
         payload = JSON.parse(payload);
         return {
-          email : payload.email,
-          pseudonym : payload.pseudonym,
-          id : payload.user_id,
-          credits : payload.credits
+          id: payload.id,
+          email: payload.email,
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          role: payload.role
         };
       }
     };
@@ -50,7 +51,7 @@ app.factory('authService',  ['$http', '$window', function($http, $window) {
     };
 
     logout = function() {
-      localStorage.removeItem('mpcc-token');
+      localStorage.removeItem('coding-project');
     };
 
     return {
