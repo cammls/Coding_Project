@@ -1,4 +1,4 @@
-var app = angular.module('CodingProject', ['ui.router', 'ui.materialize', 'ui.bootstrap']);
+var app = angular.module('meanDash', ['ui.router', 'ui.bootstrap']);
 
 // For underscore lib
 app.constant('_',

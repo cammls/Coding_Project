@@ -3,38 +3,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
 
     <title>Mean Dash</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="/app_client/css/navbar.css">
-    <link rel="stylesheet" href="/app_client/css/utilities.css"> -->
+    <link rel="stylesheet" href="/assets/vendor/assets/bower_components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/vendor/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/vendor/assets/bower_components/metisMenu/dist/metisMenu.css">
+    <!-- ALL CUSTOM CSS -->
+    <link rel="stylesheet" href="/assets/stylesheets/master.css">
 
     <!-- JS -->
-    <script src="/vendors/angular/angular.min.js"></script>
-    <script src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/vendors/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="/vendors/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="/js/jquery-2.1.1.js"></script>
-    <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/angular/angular.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/assets/vendor/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/metisMenu/dist/metisMenu.js"></script>
+    <script src="/assets/vendor/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- ANGULAR CUSTOM -->
-    <script src="/app_client/app.js"></script>
-    <script src="/app_client/routes.js"></script>
-    <script src="/app_client/controllers/MainCtrl.js"></script>
-    <script src="/app_client/controllers/LoginCtrl.js"></script>
-    <script src="/app_client/controllers/RegisterCtrl.js"></script>
-    <script src="/app_client/controllers/ProfileCtrl.js"></script>
-    <script src="/app_client/controllers/NavigationCtrl.js"></script>
-    <script src="/app_client/services/AuthService.js"></script>
-    <script src="/app_client/services/DataService.js"></script>
+    <script src="/app.js"></script>
+    <script src="/routes.js"></script>
+    <script src="/controllers/mainController.js"></script>
+    <script src="/controllers/loginController.js"></script>
+    <script src="/controllers/registerController.js"></script>
+    <script src="/controllers/profileController.js"></script>
+    <script src="/controllers/navigationController.js"></script>
+    <script src="/services/authService.js"></script>
+    <script src="/services/dataService.js"></script>
 </head>
-<body ng-app="twitterMean">
-    <div id="wrapper" ng-controller="mainController">
+
+<body ng-app="meanDash">
+    <div id="wrapper" ng-controller="mainCtrl">
         <div class="row border-bottom">
             <nav class="navbar-default navbar-static-side" role="navigation">
                 <div class="sidebar-collapse">
