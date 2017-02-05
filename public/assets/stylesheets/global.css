@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.views {
+  min-height: 90vh;
+}
+
+.spacer {
+  height: 4em;
+}
+
+.spacer {
+  height: 2em;
+}
