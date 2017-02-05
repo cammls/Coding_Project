@@ -2,6 +2,7 @@ var path      = require('path')
 var config    = require(path.join(__dirname, '../config/config.js'))
 var jwt       = require('jsonwebtoken')
 
+// SHOULD RETURN ERRORS IF TOKEN GENERATION / DECODING GOES WRONG
 
 var generateJswt = function(user_data) {
   var expiry = new Date();

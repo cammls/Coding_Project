@@ -24,7 +24,7 @@ var register = function(user_data, res) {
 }
 
 var login = function(user_data, res) {
-  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!  
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!
   user.loginUser(user_data, function(response, token) {
     if (response === "success") {
       res.status(200)
@@ -41,8 +41,8 @@ var login = function(user_data, res) {
   })
 }
 
-var logout = function(req, res) {
-  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!
+var logout = function(user_data, res) {
+  // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!  
   user.logoutUser(user_data, function(response, token) {
     if (response === "success") {
       res.status(200)
