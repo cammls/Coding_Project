@@ -19,6 +19,7 @@
     "neo4j-driver": "^1.0.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pipedrive": "^3.0.0"
   }
 }

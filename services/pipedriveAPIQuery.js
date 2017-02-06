@@ -1,8 +1,10 @@
 // MISC REQUESTS
-var rp = require('request-promise')
+var rp      = require('request-promise')
+var config  = require('../config/config.js')
+var Pipedrive = require('pipedrive');
 
 // Global prefix url
-const PIPEDRIVE_PREFIX = "api.pipedrive.com/v1/"
+const PIPEDRIVE_PREFIX = "https://api.pipedrive.com/v1/"
 // Get all deals
 const GET_DEALS = "/deals?start=0"
 // Get detail of a deal
@@ -26,31 +28,42 @@ const GET_USERS = "users"
 // Get user connections
 const GET_USERS_CONNECTIONS = "usersConnections"
 
-var get_pipedrive_data = function(params, token, callback) {
-  // api.pipedrive.com/v1/deals?start=0&limit=2&api_token=e698e510255054f5434c44c3124aaa7d17cb4b15
-  // console.log(rp)
-  var options = {
-    uri: 'https://api.pipedrive.com/v1/deals?start=0&limit=2&api_token=e698e510255054f5434c44c3124aaa7d17cb4b15',
-    // qs: {
-    //   api_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
-    // },
-    headers: {
-      'User-Agent': 'Request-Promise'
-    },
-    json: true // Automatically parses the JSON string in the response
-  };
+// var get_pipedrive_data = function(params, token, callback) {
+//   // api.pipedrive.com/v1/deals?start=0&limit=2&api_token=e698e510255054f5434c44c3124aaa7d17cb4b15
+//   // console.log(rp)
+//   var options = {
+//     uri: 'https://api.pipedrive.com/v1/deals?start=0&limit=2&api_token=e698e510255054f5434c44c3124aaa7d17cb4b15',
+//     // qs: {
+//     //   api_token: 'xxxxx xxxxx' // -> uri + '?access_token=xxxxx%20xxxxx'
+//     // },
+//     headers: {
+//       'User-Agent': 'Request-Promise'
+//     },
+//     json: true // Automatically parses the JSON string in the response
+//   };
+//
+//   rp(options)
+//   .then(function(res) {
+//     console.log(res);
+//     callback('success', res.data)
+//     // return res.data;
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//     callback('error', res.data)
+//     // return err;
+//   })
+// }
 
-  rp(options)
-  .then(function(res) {
-    console.log(res);
-    callback('success', res.data)
-    // return res.data;
-  })
-  .catch(function(err) {
-    console.log(err);
-    callback('error', res.data)
-    // return err;
-  })
-}
+// exports.get_pipedrive_data = get_pipedrive_data
+
+var pipedrive = new Pipedrive.Client(config.pipedrivetoken, { strictMode: true });
+
+var get_pipedrive_data = pipedrive.Deals.getAll({}, function(err, deals) {
+    if (err) throw err;
+    for (var i = 0; i < deals.length; i++) {
+        console.log(deals[i].title + ' (worth ' + deals[i].value + ' ' + deals[i].currency + ')');
+    }
+});
 
 exports.get_pipedrive_data = get_pipedrive_data
