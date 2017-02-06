@@ -7,7 +7,13 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
       }
     })
   }
-
+  var getStripeData = function() {
+    return $http.get('/api/stripe_data', {
+      headers: {
+        Authorization: 'Bearer '+ authService.getToken()
+    }
+    })
+  }
   // var createProduct = function(product) {
   //   var fd = new FormData
   //   for(var key in product)
@@ -89,6 +95,7 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
 
   return {
     getProfile : getProfile,
+    getStripeData: getStripeData
     // createProduct : createProduct,
     // getProducts : getProducts,
     // voteFor : voteFor,

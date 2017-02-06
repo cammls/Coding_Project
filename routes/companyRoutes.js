@@ -16,7 +16,7 @@ companyRoutes.get('/companies', function (req, res){
   ctrlCompany.list(res);
 });
 
-// Show one 
+// Show one
 companyRoutes.get('/company/:id', function(req,res){
   var company_id = req.params.id;
   ctrlCompany.show(company_id,res);

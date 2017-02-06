@@ -15,6 +15,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controller: 'homeCtrl',
       controllerAs: 'vm'
     }
+    var financeState = {
+      name: 'finance',
+      url: "/finance",
+      templateUrl: "views/finance.html",
+      controller: 'financeCtrl',
+      // controllerAs: 'vm'
+    }
 
     var loginState = {
       name: 'login',
@@ -36,6 +43,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
     $stateProvider.state(errorState)
+    $stateProvider.state(financeState)
 
     $locationProvider.html5Mode(true)
 
