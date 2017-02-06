@@ -131,6 +131,20 @@ var logoutUser = function(user_data, callback) {
     console.log(error);
   });
  }
+ var editUser = function(id, data, callback){
+  //  TODO GERER PASSWORD
+   session
+   .run("MATCH (u:User) WHERE ID(u)= {id} SET u.first_name = {first_name}, u.last_name= {last_name}, u.email = {email}, u.role={role} RETURN u"
+   ,{id: neo4j.int(id),first_name: data.first_name, last_name: data.last_name, email: data.email, role: data.role} )
+   .then(function(result){
+    // Completed!
+    callback(result.records)
+    session.close();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
  var deleteUser = function(id, callback){
    session
    .run("MATCH (u:User) WHERE ID(u) ={id} DELETE u",{id:  neo4j.int(id)})
@@ -149,3 +163,4 @@ exports.logoutUser = logoutUser
 exports.getUsers = getUsers
 exports.showUser = showUser
 exports.deleteUser = deleteUser
+exports.editUser = editUser

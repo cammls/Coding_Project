@@ -38,6 +38,11 @@ userRoutes.get('/users/:id', function(req,res){
   ctrlUsers.show(id, res)
 });
 
+userRoutes.post('/users/:id/edit', function(req,res){
+  var id = req.params.id
+  var data = req.body
+  ctrlUsers.edit(id, data, res)
+})
 // delete a user
 
 userRoutes.delete('/users/:id/delete', function(req,res){

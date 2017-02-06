@@ -10,6 +10,12 @@ var show = function(id, res){
     res.json(response)
   })
 }
+var edit = function(id, data, res){
+  // TODO checks !! purpose of a controller
+  user.editUser(id, data, function(response){
+    res.json(response)
+  })
+}
 var delete_ = function(id, res){
   user.deleteUser(id, function(){
     res.send("user deleted")
@@ -18,3 +24,4 @@ var delete_ = function(id, res){
 exports.list  = list
 exports.show  = show
 exports.delete_  = delete_
+exports.edit  = edit
