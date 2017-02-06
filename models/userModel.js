@@ -92,22 +92,20 @@ var logoutUser = function(user_data, callback) {
     callback("failure", "wrongtoken")
   }
 }
-//  TO CONTINUE LATER
- // var tieUsertoCompany = function(user_id, company_id)
- // {
- //   session.run("MATCH (u:User) WHERE ID(u)= {user_id}, (c:Company) WHERE ID(c) = {company_id} CREATE (u)-[:BELONGS_TO]->(c) RETURN u,c", {user_id: neo4j.int(user_id), company_id: neo4j.int(company_id)})
- //   .then(function(result){
- //     result.records.forEach(function(record) {
- //       console.log(record._fields);
- //     });
- //     // Completed!
- //     session.close();
- //   })
- //   .catch(function(error) {
- //     console.log(error);
- //   });
- // }
- 
+
+ var tieUsertoCompany = function(user_id, company_id)
+ {
+   session.run("MATCH (u:User) WHERE ID(u)= {user_id} MATCH (c:Company) WHERE ID(c)={company_id} CREATE (u)-[r:BELONGS_TO]->(c) RETURN u,r,c", {user_id: neo4j.int(user_id), company_id: neo4j.int(company_id)})
+   .then(function(result){
+     console.log(result)
+     // Completed!
+     session.close();
+   })
+   .catch(function(error) {
+     console.log(error);
+   });
+ }
+
  var getUsers = function(callback){
    session
    .run("MATCH (u:User) RETURN u")
