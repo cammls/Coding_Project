@@ -1,0 +1,14 @@
+<h1>UPLOAD</h1>
+
+<div class="container">
+  <form class="col-sm-8 col-offset-sm-2">
+    <div class="row">
+      <div class="form-group">
+        <label for="exampleInputFile">Photo input</label>
+        <input type="file" uploader="uploader" file-model="user.picture" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" multiple>
+        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+      </div>
+      <button ng-click="uploadPicture(user)" class="btn btn-primary" type="submit">UPLOAD</button>
+    </div>
+  </form>
+</div>

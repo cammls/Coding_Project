@@ -32,10 +32,28 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controllerAs: 'vm'
     }
 
+    var uploadState = {
+      name: 'upload',
+      url: '/upload',
+      templateUrl: '/views/test_uploads/upload.html',
+      controller: 'uploadCtrl',
+      constrollerAs: 'vm'
+    }
+
+    var displayuploadState = {
+      name: 'display_upload',
+      url: '/display_upload',
+      templateUrl: '/views/test_uploads/display_upload.html',
+      controller: 'displayuploadCtrl',
+      constrollerAs: 'vm'
+    }
+
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
     $stateProvider.state(errorState)
+    $stateProvider.state(uploadState)
+    $stateProvider.state(displayuploadState)
 
     $locationProvider.html5Mode(true)
 

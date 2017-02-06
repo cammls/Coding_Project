@@ -56,4 +56,9 @@ userRoutes.put('/users/:id/edit', function(req, res){
 
 })
 
+userRoutes.post('/users_upload', function(req, res) {
+  console.log(req.file)
+})
+
+
 module.exports = userRoutes

@@ -8,6 +8,8 @@ var path           = require('path')
 var passport       = require('passport')
 var config         = require('./config/config.js')
 var passportConfig = require('./config/passport.js')
+var cors           = require('cors')
+var multer         = require('multer')
 
 
 // configure app to use bodyParser() ===========================================
@@ -16,6 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(passport.initialize())
+
+app.use(multer({dest:'./uploads/'}).single('picture'));
+
+// CORS
+app.use(cors())
 
 // Routes ======================================================================
 var userRoutes      = require('./routes/userRoutes.js')
