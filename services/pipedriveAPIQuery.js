@@ -30,7 +30,7 @@ const GET_USERS_CONNECTIONS = "usersConnections"
 
 var pipedrive = new Pipedrive.Client(config.pipedrivetoken, { strictMode: true });
 
-var get_pipedrive_data = function (error, callback) {
+var get_pipedrive_deals = function(error, callback) {
   // console.log('    svc->');
   pipedrive.Deals.getAll({}, function(err, payload) {
     if (err) {
@@ -43,4 +43,4 @@ var get_pipedrive_data = function (error, callback) {
   })
 }
 
-exports.get_pipedrive_data = get_pipedrive_data
+exports.get_pipedrive_deals = get_pipedrive_deals
