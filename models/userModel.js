@@ -1,150 +1,98 @@
-// var passport       = require('passport')
-// var LocalStrategy  = require('passport-local').Strategy
 var path           = require('path')
 var jwt            = require('../services/jswtService.js')
 var driver         = require('./connect_db.js').connectdb()
+var neo4j          = require('neo4j-driver').v1
 var session        = driver.session()
 var bcrypt         = require('bcrypt-nodejs')
 
 var registerUser = function(user_data, callback) {
+  // This is not a very secured way, should be hashed and salted
   var hashed_pass = bcrypt.hashSync(user_data.password)
-  // var token = jwt.generateJswt(user_data)
-  console.log(user_data);
-  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}}) RETURN p",
+
+  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password} }) RETURN ID(p), p.first_name, p.last_name, p.email, p.role",
               {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass })
          .then(function(result) {
-              console.log(result.records[0])
-              callback(result.records.keys)
+              var record = result.records[0]
+              var id = record._fields[0].low
+              var first_name = record._fields[1]
+              var last_name = record._fields[2]
+              var email = record._fields[3]
+              var role = record._fields[4]
+              var user_data = {id: id, first_name: first_name, last_name: last_name, email: email, role: role }
+              var token = jwt.generateJswt(user_data)
+              session.close()
+              session.run("MATCH (n:User) WHERE ID(n) = {id} SET n.token = {token}", {id: neo4j.int(id), token: token}).then(function(result) {
+                callback("success", token)
+                session.close()
+              }, function(reason) {
+                callback("failure", "notoken")
+                session.close()
+              })
           }, function(reason) {
-            console.log('hello')
-              console.log(reason)
+              callback("failure", "notoken")
+              session.close()
           });
 
 }
 
-var loginUser = function() {
-
+var loginUser = function(user_data, callback) {
+  // Find user corresponding to email
+  var user_password = user_data.password
+  session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password, ID(n), n.first_name, n.last_name, n.email, n.role", {email: user_data.email}).then(function(result) {
+    if (result.records[0] === undefined) {
+      callback("failure", "notoken")
+      session.close()
+      return
+    }
+    var stored_password = result.records[0]._fields[0]
+    var password_comparison = bcrypt.compareSync(user_password, stored_password)
+    if (password_comparison) {
+      // SHOULD BE REFACTOED IN FUNCTION USED BY CURRENT MODULE (DONT KNOW YET HOW TO DO) ASK TANGUY
+      var record = result.records[0]
+      var id = record._fields[1].low
+      var first_name = record._fields[2]
+      console.log(first_name)
+      var last_name = record._fields[3]
+      var email = record._fields[4]
+      var role = record._fields[5]
+      var new_user_data = {id: id, first_name: first_name, last_name: last_name, email: email, role: role }
+      var token = jwt.generateJswt(new_user_data)
+      session.close()
+      session.run("MATCH (n:User) WHERE ID(n) = {id} SET n.token = {token}", {id: neo4j.int(id), token: token}).then(function(result) {
+        callback("success", token)
+        session.close()
+      }, function(reason) {
+        callback("failure", "notoken")
+        session.close()
+      })
+    } else {
+      session.close()
+      callback("failure", "notoken")
+      session.close()
+    }
+  }, function(reason) {
+      callback("failure", "notoken")
+      session.close()
+  })
 }
 
-var logoutUser = function() {
-
+var logoutUser = function(user_data, callback) {
+  // CHECK IF THIS IS THE BEST SOLUTION TO FIND USER BY ID AFTER DECODING TOKEN
+  // ONE OTHER SOLUTION BEEING CHECK IF THERE IS A USER THAT HAS THIS GIVEN TOKEN
+  var token = user_data.token
+  console.log(token)
+  if (decoded = jwt.decodeJswt(token)) {
+    session.run("MATCH (n:User) WHERE ID(n) = {id} REMOVE n.token", {id: neo4j.int(decoded.id)}).then(function(result) {
+      callback("success", token)
+      session.close()
+    }, function(reason) {
+      callback("failure", "notoken")
+      session.close()
+    })
+  } else {
+    callback("failure", "wrongtoken")
+  }
 }
-
-// ===============================================================================
-// var register = function(req, res) {
-//   console.log(req.body)
-//   var user = new User()
-//
-//   user.name = req.body.name;
-//   user.email = req.body.email;
-//
-//   user.setPassword(req.body.password)
-//   user.save(function(err) {
-//     if (err) throw err
-//     var token
-//     token = user.generateJswt()
-//     res.status(200)
-//     res.json({
-//       "token" : token
-//     });
-//   });
-// };
-// ===============================================================================
-// console.log(req.body)
-// passport.use(new LocalStrategy(function(username, password, done) {
-//     console.log("2");
-//     session
-//     .run("MATCH (u:User) WHERE u.username = {username} RETURN u", {username: req.body.username})
-//     .then(function(result){
-//       if (result == null){
-//         return done(res.send("incorrect username"))
-//         // return done(null, false, { message: 'Incorrect username.' });
-//       }
-//       if (!bcrypt.compareSync(req.body.password, hash)) // true)
-//       {
-//         // return done(null, false, { message: 'Incorrect password.' });
-//         return done(res.send("incorrect username"))
-//       }
-//     });
-//     return done(null, user);
-//   }
-// ))
-// ===============================================================================
-// passport.authenticate('local', function(err, user, info) {
-//   var token;
-//
-//   if (err) {
-//     res.status(404).json(err)
-//     return;
-//   }
-//   if (user) {
-//     token = user.generateJswt();
-//     res.status(200)
-//     res.json({
-//       "token" : token
-//     })
-//   } else {
-//     res.status(401).json(info)
-//   }
-// })(req, res)
-// ===============================================================================
-// var hash = bcrypt.hashSync(req.body.password);
-// session
-// .run( "CREATE (:User {firstname: {firstname}, lastname: {lastname}, role: {role}, email: {email}, password: {password}})",
-// {firstname: req.body.firstname,lastname: req.body.lastname, email: req.body.email,role: req.body.role, password: hash })
-//
-// .then( function() {
-//   res.send('Account created');
-//   res.end();
-//   session.close();
-//   // driver.close();
-// })
-// .catch(function(error) {
-//   res.send(error);
-//   console.log(error);
-// });
-// ===============================================================================
-// session
-// .run("MATCH (u:User) RETURN u")
-// .then( function(result){
-//   res.json(result)
-//   session.close();
-//   driver.close();
-// });
-//   session
-// ===============================================================================
-// .run("MATCH (u:User) WHERE u.email = {email} RETURN u", {username: req.params.email})
-// .then( function(result){
-//   res.json(result)
-//   session.close();
-// })
-// .catch(function(error) {
-//   res.send(error);
-//   console.log(error);
-// });
-// ================================================================================
-// session
-// .run("MATCH (u:User { email: {email} })DETACH DELETE u", {email: req.params.email})
-// .then( function(){
-//   res.send("user deleted")
-//   session.close();
-//   driver.close();
-// })
-// .catch(function(error) {
-//   res.send(error);
-//   console.log(error);
-// });
-// ================================================================================
-// session.run("MATCH (n:User { email: {email} })SET n.firstname = {firstname},n.lastname = {lastname}, n.email = {new_email} RETURN n",
-// {email: req.params.email, firstname:req.body.firstname,lastname:req.body.lastname, new_email: req.body.email})
-// .then( function(result){
-//   res.json(result)
-//   session.close();
-// })
-// .catch(function(error) {
-//   res.send(error);
-//   console.log(error);
-// });
 
 exports.registerUser = registerUser
 exports.loginUser = loginUser
