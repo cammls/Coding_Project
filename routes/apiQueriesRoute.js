@@ -4,9 +4,6 @@ var path              = require('path')
 var qryCtrl           = require('../controllers/queryController.js')
 
 // PIPEDRIVE REQUESTS
-apiQueriesRoutes.post('/fetchpipedrive', function(req, res){
-  console.log('ROUTE:');
-  qryCtrl.prepareQuery(req, res);
-})
+apiQueriesRoutes.post('/fetchpipedrive', qryCtrl.prepareQuery);
 
 module.exports = apiQueriesRoutes
