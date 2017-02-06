@@ -32,11 +32,11 @@ var registerUser = function(user_data, callback) {
               callback("failure", "notoken")
               session.close()
           });
-
 }
 
 var loginUser = function(user_data, callback) {
   // Find user corresponding to email
+
   var user_password = user_data.password
   session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password, ID(n), n.first_name, n.last_name, n.email, n.role", {email: user_data.email}).then(function(result) {
     if (result.records[0] === undefined) {
@@ -94,6 +94,74 @@ var logoutUser = function(user_data, callback) {
   }
 }
 
+ var tieUsertoCompany = function(user_id, company_id)
+ {
+   session.run("MATCH (u:User) WHERE ID(u)= {user_id} MATCH (c:Company) WHERE ID(c)={company_id} CREATE (u)-[r:BELONGS_TO]->(c) RETURN u,r,c", {user_id: neo4j.int(user_id), company_id: neo4j.int(company_id)})
+   .then(function(result){
+     console.log(result)
+     // Completed!
+     session.close();
+   })
+   .catch(function(error) {
+     console.log(error);
+   });
+ }
+
+ var getUsers = function(callback){
+   session
+   .run("MATCH (u:User) RETURN u")
+   .then(function(result){
+    // Completed!
+    callback(result.records)
+    session.close();
+
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
+ var showUser = function(id, callback){
+   session
+   .run("MATCH (u:User) WHERE ID(u) ={id} RETURN u",{id:  neo4j.int(id)})
+   .then(function(result){
+    // Completed!
+    callback(result.records)
+    session.close();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
+ var editUser = function(id, data, callback){
+  //  TODO GERER PASSWORD
+   session
+   .run("MATCH (u:User) WHERE ID(u)= {id} SET u.first_name = {first_name}, u.last_name= {last_name}, u.email = {email}, u.role={role} RETURN u"
+   ,{id: neo4j.int(id),first_name: data.first_name, last_name: data.last_name, email: data.email, role: data.role} )
+   .then(function(result){
+    // Completed!
+    callback(result.records)
+    session.close();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
+ var deleteUser = function(id, callback){
+   session
+   .run("MATCH (u:User) WHERE ID(u) ={id} DELETE u",{id:  neo4j.int(id)})
+   .then(function(){
+    // Completed!
+    callback()
+    session.close();
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+ }
 exports.registerUser = registerUser
 exports.loginUser = loginUser
 exports.logoutUser = logoutUser
+exports.getUsers = getUsers
+exports.showUser = showUser
+exports.deleteUser = deleteUser
+exports.editUser = editUser

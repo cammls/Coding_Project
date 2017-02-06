@@ -19,13 +19,16 @@ app.use(passport.initialize())
 
 // Routes ======================================================================
 var userRoutes      = require('./routes/userRoutes.js')
+var companyRoutes	= require('./routes/companyRoutes.js')
 var apiQueriesRoute = require('./routes/apiQueriesRoute.js')
 
+app.use('/api', companyRoutes)
 app.use('/api', userRoutes)
 app.use('/api', apiQueriesRoute)
+
 //-- catch all route to initialize client app --
 app.get('*', function(req, res) {
-    res.sendFile('index.html', { root: path.join(__dirname, './public/app_client') })
+    res.sendFile('index.html', { root: path.join(__dirname, './public') })
 });
 
 app.listen(8080);
