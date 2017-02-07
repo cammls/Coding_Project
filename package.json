@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "algoliasearch": "^3.21.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
     "cookie-parser": "^1.4.3",
