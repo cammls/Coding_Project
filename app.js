@@ -8,6 +8,7 @@ var path           = require('path')
 var passport       = require('passport')
 var config         = require('./config/config.js')
 var passportConfig = require('./config/passport.js')
+var algoliasearch  = require('algoliasearch') 
 
 
 // configure app to use bodyParser() ===========================================
