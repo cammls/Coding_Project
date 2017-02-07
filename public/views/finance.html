@@ -1,3 +1,66 @@
-TEST FINANCE
-{{testeuh}}
-{{stripeData}}
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <!-- Customers: <br>
+    {{stripeCustomers}} -->
+    <div class="col-lg-4">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <span class="label label-success pull-right">This month</span>
+          <h5>Balance</h5>
+        </div>
+        <div class="ibox-content">
+          <h1 class="no-margins">{{stripeData.balance.available[0].amount}}€</h1>
+        </div>
+      </div>
+    </div> <!-- wrapper content  -->
+  </div> <!-- row -->
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Charges</h5>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-hover no-margins">
+              <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Currency</th>
+                    <th>Refund</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <tr ng-repeat="charge in stripeData.charges.data">
+                     <td>{{ charge.amount /100}}</td>
+                     <td>{{ charge.currency }}</td>
+                     <td>{{ charge.amount_refunded }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Customers</h5>
+        </div>
+        <div class="ibox-content">
+          <table class="table table-hover no-margins">
+              <thead>
+                <tr>
+                    <th>Account balance</th>
+                    <th>Email</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <tr ng-repeat="customer in stripeData.customers.data">
+                     <td>{{ customer.account_balance}}</td>
+                     <td>{{ customer.email }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+    </div>

@@ -1,10 +1,12 @@
 // MISC REQUESTS
-var http = require('http')
+var rp      = require('request-promise')
+var config  = require('../config/config.js')
+var Pipedrive = require('pipedrive');
 
 // Global prefix url
-const PIPEDRIVE_PREFIX = "api.pipedrive.com/v1/"
+const PIPEDRIVE_PREFIX = "https://api.pipedrive.com/v1/"
 // Get all deals
-const GET_DEALS = "deals?start=0"
+const GET_DEALS = "/deals?start=0"
 // Get detail of a deal
 const GET_DETAIL_OF_DEAL = "deals/:id"
 // Get all organizations
@@ -26,35 +28,19 @@ const GET_USERS = "users"
 // Get user connections
 const GET_USERS_CONNECTIONS = "usersConnections"
 
-var get_pipedrive_all_something = function(params) {
-  console.log('service');
-  // return http.get({
-  //         host: PIPEDRIVE_PREFIX,
-  //         path: GET_DEALS,
-  //         agent: false
-  //     }, function(response) {
-  //       console.log('response')
-  //         // Continuously update stream with data
-  //         var body = '';
-  //         response.on('data', function(d) {
-  //             body += d;
-  //         });
-  //         response.on('end', function() {
-  //
-  //             // Data reception is done, do whatever with it!
-  //             //var parsed = JSON.parse(body);
-  //             // callback({
-  //             //     email: parsed.email,
-  //             //     password: parsed.pass
-  //             // });
-  //             console.log(parsed);
-  //         });
-  //     });
+var pipedrive = new Pipedrive.Client(config.pipedrivetoken, { strictMode: true });
+
+var get_pipedrive_deals = function(error, callback) {
+  // console.log('    svc->');
+  pipedrive.Deals.getAll({}, function(err, payload) {
+    if (err) {
+      // console.log('    <-error');
+      callback(err, null)
+    } else {
+      // console.log('    <-json');
+      callback(null, payload)
+    }
+  })
 }
 
-var get_pipedrive_details_of_something = function(something, id, token) {
-
-}
-
-exports.get_pipedrive_details_of_something = get_pipedrive_details_of_something
-exports.get_pipedrive_all_something = get_pipedrive_all_something
+exports.get_pipedrive_deals = get_pipedrive_deals
