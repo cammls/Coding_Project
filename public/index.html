@@ -27,6 +27,8 @@
     <!-- ANGULAR CUSTOM -->
     <script src="/app.js"></script>
     <script src="/routes.js"></script>
+    <script src="/services/authService.js"></script>
+    <script src="/services/dataService.js"></script>
     <script src="/controllers/mainController.js"></script>
     <script src="/controllers/loginController.js"></script>
     <script src="/controllers/registerController.js"></script>
@@ -34,8 +36,8 @@
     <script src="/controllers/navigationController.js"></script>
     <script src="/controllers/homeController.js"></script>
     <script src="/controllers/financeController.js"></script>
-    <script src="/services/authService.js"></script>
-    <script src="/services/dataService.js"></script>
+    <script src="/controllers/logoutController.js"></script>
+    <script src="/controllers/companyController.js"></script>
 </head>
 
 <body ng-app="meanDash">
@@ -52,9 +54,9 @@
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="clear">
                                         <span class="block m-t-xs">
-                                            <strong class="font-bold">David Williams</strong>
+                                            <strong class="font-bold">{{currentUser.first_name}} {{currentUser.last_name}}</strong>
                                         </span>
-                                        <span class="text-muted text-xs block">Chief Executive Officer</span>
+                                        <span class="text-muted text-xs block">{{currentUser.role}}</span>
                                     </span>
                                 </a>
                             </div>
@@ -134,22 +136,18 @@
                                     <li>
                                         <div class="text-center link-block">
                                             <a href="notifications.html">
-                                                <strong>See All Alerts</strong>
-                                                <i class="fa fa-angle-right"></i>
+                                              <strong>See All Alerts</strong>
+                                              <i class="fa fa-angle-right"></i>
                                             </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="login.html">
-                                    <i class="fa fa-sign-out"></i> Log out
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <ui-view></ui-view>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                        <li ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
+                                      <li ng-hide="isLoggedIn"><a ui-sref="login">Login</a></li>
+                                    </ul>
+                                  </nav>
+                                </div>
+                                <ui-view></ui-view>
               </div>
           </div>
         </div>

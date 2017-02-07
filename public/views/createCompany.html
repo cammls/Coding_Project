@@ -1,0 +1,26 @@
+YOUR COMPANY
+<div>
+  <form ng-submit="ChooseCompany()" ng-controller="companyCtrl">
+    <label for="repeatSelect"> Choose from an existing company: </label>
+    <select name="repeatSelect" id="repeatSelect" ng-model="ChosenCompany">
+      <option ng-repeat="option in Companies track by $index" value="{{option._fields[0].identity.low}}">{{option._fields[0].properties.name}}</option>
+    </select>
+    <input type="submit" id="submit" value="Submit" />
+  </form>
+  <hr>
+
+</div>
+Or create one:
+<form ng-submit="vm.onSubmit()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Company name" ng-model="vm.company_fields.name">
+    <br>
+    <label for="description">Description:</label>
+    <input type="text" id="description" placeholder="Description" ng-model="vm.company_fields.description">
+    <br>
+    <label for="industry">Industry:</label>
+    <input type="text" id="industry" placeholder="Company industry" ng-model="vm.company_fields.industry">
+    <br>
+
+  <button type="submit" class="btn btn-default">Create company</button>
+</form>

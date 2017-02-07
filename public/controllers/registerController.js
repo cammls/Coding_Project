@@ -14,7 +14,7 @@ app.controller('registerCtrl', ['$scope', 'authService', '$location', '$state', 
           console.log(err)
         })
         .then(function(){
-          $state.go('home')
+          $state.go('createCompany')
         });
     };
 }])

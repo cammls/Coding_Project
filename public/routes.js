@@ -30,6 +30,12 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controller: 'loginCtrl',
       controllerAs: 'vm'
     }
+    var logoutState = {
+      name: 'logout',
+      url: '/logout',
+      controller: 'logoutCtrl',
+      controllerAs: 'vm'
+    }
 
     var registerState = {
       name: 'register',
@@ -38,12 +44,21 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controller: 'registerCtrl',
       controllerAs: 'vm'
     }
+    var createCompanyState = {
+      name: 'createCompany',
+      url: '/company',
+      templateUrl: '/views/createCompany.html',
+      controller: 'companyCtrl',
+      controllerAs: 'vm'
+    }
 
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
     $stateProvider.state(errorState)
     $stateProvider.state(financeState)
+    $stateProvider.state(logoutState)
+    $stateProvider.state(createCompanyState)
 
     $locationProvider.html5Mode(true)
 

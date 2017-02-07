@@ -165,3 +165,4 @@ exports.getUsers = getUsers
 exports.showUser = showUser
 exports.deleteUser = deleteUser
 exports.editUser = editUser
+exports.tieUsertoCompany = tieUsertoCompany

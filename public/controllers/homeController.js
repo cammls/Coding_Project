@@ -1,3 +1,5 @@
-app.controller('homeCtrl', ['$scope', function($scope) {
+app.controller('homeCtrl', ['$scope', 'authService', function($scope, authService) {
+
+
 
 }])
