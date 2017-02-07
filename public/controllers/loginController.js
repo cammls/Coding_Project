@@ -15,7 +15,7 @@ app.controller('loginCtrl', [ '$scope', 'authService', '$state', '$rootScope', '
     .then(function() {
       $rootScope.isLoggedIn = authService.isLoggedIn();
       $rootScope.currentUser = authService.currentUser();
-      $state.go('products')
+      $state.go('home')
     });
   };
 
