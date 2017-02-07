@@ -18,6 +18,6 @@ apiQueriesRoutes.get('/stripe_data', function(req, res){
 })
 
 // PIPEDRIVE REQUESTS
-apiQueriesRoutes.post('/fetchpipedrive', qryCtrl.prepareQuery);
+apiQueriesRoutes.post('/pipedrive_data', qryCtrl.prepareQuery);
 
 module.exports = apiQueriesRoutes
