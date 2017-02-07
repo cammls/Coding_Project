@@ -1,8 +1,10 @@
 app.controller('registerCtrl', ['$scope', 'authService', '$location', '$state', function($scope, authService, $location, $state) {
     var vm = this;
     vm.credentials = {
-      pseudonym : "",
+      first_name : "",
+      last_name : "",
       email : "",
+      role : "",
       password : ""
     };
     vm.onSubmit = function () {
