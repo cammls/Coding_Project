@@ -20,7 +20,7 @@
                 <h5>Deals won</h5>
             </div>
             <div class="ibox-content">
-                <h1 class="no-margins">11</h1>
+                <h1 class="no-margins">{{ deal_count }}</h1>
                 <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
                 <small>Deals won this month</small>
             </div>
@@ -32,7 +32,7 @@
                     <h5>Avg Basket</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">106,12€</h1>
+                    <h1 class="no-margins">{{ income / deal_count }}</h1>
                     <div class="stat-percent font-bold text-navy">+44% <i class="fa fa-level-up"></i></div>
                     <small>Average order size</small>
                 </div>
