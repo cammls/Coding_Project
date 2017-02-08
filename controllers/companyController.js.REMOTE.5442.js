@@ -5,17 +5,6 @@ var algoliasearch = require('algoliasearch');
 var client        = algoliasearch('7G7ED6C2ZX', '4901abfb3e83b3d3b6c52cdbd1677f9b');
 var index         = client.initIndex('company');
 
-<<<<<<< HEAD
-var create = function(company_data, res){
-	companyModel.create(company_data, function(response){
-		res.json(response)
-	});
-}
-
-var list = function(res){
-	companyModel.list(res);
-
-=======
 var create = function(company_data){
 	companyModel.create(company_data);
 	//adding company to algolia
@@ -34,7 +23,6 @@ var create = function(company_data){
 
 var list = function(res){
 	companyModel.list(res);	
->>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
 }
 
 var show = function(company_data,res){
@@ -66,3 +54,4 @@ exports.list = list
 exports.create = create
 exports.show = show
 exports.edit = edit
+

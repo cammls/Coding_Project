@@ -52,13 +52,41 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controllerAs: 'vm'
     }
 
+    var salesState = {
+      name: 'sales',
+      url: '/sales',
+      templateUrl: '/views/sales.html',
+      controller: 'salesCtrl',
+    }
+
+    var userprofileState = {
+      name: 'userprofile',
+      url: '/userprofile',
+      templateUrl: '/views/userprofile.html',
+      controller: 'userprofileCtrl',
+      controllerAs: 'vm'
+    }
+    var companyState = {
+      name: 'companyprofile',
+      url: '/companyprofile',
+      templateUrl: '/views/companyprofile.html',
+      controller: 'companyprofileCtrl',
+      controllerAs: 'vm'
+    }
+
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
     $stateProvider.state(errorState)
     $stateProvider.state(financeState)
+<<<<<<< HEAD
     $stateProvider.state(logoutState)
     $stateProvider.state(createCompanyState)
+=======
+    $stateProvider.state(salesState)
+    $stateProvider.state(userprofileState)
+    $stateProvider.state(companyState)
+>>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
 
     $locationProvider.html5Mode(true)
 

@@ -39,7 +39,8 @@ userRoutes.get('/users/:id', function(req,res){
   ctrlUsers.show(id, res)
 });
 
-userRoutes.post('/users/:id/edit', function(req,res){
+//edit user
+userRoutes.put('/users/:id/edit', function(req,res){
   var id = req.params.id
   var data = req.body
   ctrlUsers.edit(id, data, res)

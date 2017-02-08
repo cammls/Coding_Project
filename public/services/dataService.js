@@ -14,6 +14,33 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     }
     })
   }
+<<<<<<< HEAD
+=======
+
+  var getPipedriveData = function() {
+    return $http.get('/api/pipedrive_data', {
+      headers: {
+        Authorization: 'Bearer '+ authService.getToken()
+    }
+    })
+  }
+
+  // var createProduct = function(product) {
+  //   var fd = new FormData
+  //   for(var key in product)
+  //     fd.append(key, product[key])
+  //
+  //   return $http.post('/api/products', fd, {
+  //     transformRequest: angular.identity,
+  //     headers: {
+  //       'Content-Type': undefined,
+  //       Authorization: authService.getToken()
+  //     }
+  //   }).then(function(response) {
+  //     console.log(response)
+  //   })
+  // }
+>>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
 
   var getCompanies = function() {
     return $http.get('/api/companies', {
@@ -36,11 +63,20 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
   return {
     getProfile : getProfile,
     getStripeData: getStripeData,
+<<<<<<< HEAD
     getCompanies: getCompanies,
     tieUsertoCompany: tieUsertoCompany,
     createCompany: createCompany
 
+=======
+    getPipedriveData : getPipedriveData
+    // createProduct : createProduct,
+    // getProducts : getProducts,
+    // voteFor : voteFor,
+    // getUserVote : getUserVote,
+    // ratingProduct : ratingProduct,
+    // currentRateProduct : currentRateProduct,
+    // placeBid : placeBid
+>>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
   }
-
-
 }]);

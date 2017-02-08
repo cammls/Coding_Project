@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 app.controller('companyCtrl', ['$scope', 'dataService', '$location', '$state','$rootScope', function($scope, dataService, $location, $state, $rootScope) {
   $scope.getCompanies = function(){
     dataService.getCompanies()
@@ -35,4 +36,9 @@ app.controller('companyCtrl', ['$scope', 'dataService', '$location', '$state','$
         });
   };
   $scope.getCompanies()
+=======
+app.controller('profileCtrl', ['$scope', 'authService', '$location', '$state', function($scope, authService, $location, $state) {
+  $scope.test=[1,2,3];
+  
+>>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
 }])
