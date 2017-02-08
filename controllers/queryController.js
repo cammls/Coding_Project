@@ -8,7 +8,7 @@ var prepareQuery = function(req, res) {
       // console.log(error);
       res.json({ 'error' : error})
     } else {
-      console.log(data[0]);
+      // console.log(data[0]);
       res.json({ 'pipedrive_json' : data})
     }
   })

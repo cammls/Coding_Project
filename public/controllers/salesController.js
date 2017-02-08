@@ -15,20 +15,9 @@ app.controller('salesCtrl', ['$scope','dataService', function($scope, dataServic
         }
       }
     }, function myError(error) {
-    console.error(error.statusText);
-  });
-}
+      console.error(error.statusText);
+    });
+  }
 
-$scope.getPipedriveData();
+  $scope.getPipedriveData();
 }])
-// $scope.calculateSum = function(data){
-//   var sum=0;
-//   var counter=0;
-//   for (var property in data) {
-//     if (data.hasOwnProperty(property)) {
-//       sum += data[property];
-//       counter++;
-//     }
-//   }
-//   return sum;
-// };

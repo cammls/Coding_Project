@@ -52,60 +52,19 @@
                                 <th>Stage</th>
                                 <th>Client</th>
                                 <th>Value</th>
-                                <th>Closing</th>
+                                <th>Contact</th>
                                 <th>Sales rep</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody ng-repeat="deal in pipedriveData.pipedrive_json | limitTo:15 | filter: {status: 'open'}">
                             <tr>
-                                <td><small>Demo Scheduled</small></td>
-                                <td>Google</td>
-                                <td>8 000€</td>
-                                <td>31/03/2017</td>
-                                <td>Tony</td>
+                                <td><small>{{ deal.stage_id }}</small></td>
+                                <td>{{ deal.org_name }}</td>
+                                <td>{{ deal.formatted_weighted_value }}</td>
+                                <td>{{ deal.person_name }}</td>
+                                <td>{{ deal.owner_name }}</td>
                             </tr>
-                            <tr>
-                                <td><small>Negotiating</small></td>
-                                <td>Facebook</td>
-                                <td>8 000€</td>
-                                <td>31/03/2017</td>
-                                <td>Mark</td>
-                            </tr>
-                            <tr>
-                                <td><small>Demo Scheduled</small></td>
-                                <td>Amazon</td>
-                                <td>12 000€</td>
-                                <td>30/04/2017</td>
-                                <td>Mike</td>
-                            </tr>
-                            <tr>
-                                <td><small>Closing</small></td>
-                                <td>Amazon</td>
-                                <td>12 000€</td>
-                                <td>28/02/2017</td>
-                                <td>Ashley</td>d>
-                            </tr>
-                            <tr>
-                                <td><small>Demo Scheduled</small></td>
-                                <td>Netflix</td>
-                                <td>12 450€</td>
-                                <td>30/04/2017</td>
-                                <td>Barbara</td>
-                            </tr>
-                            <tr>
-                                <td><small>Demo Scheduled</small></td>
-                                <td>Slack</td>
-                                <td>11 000€</td>
-                                <td>30/04/2017</td>
-                                <td>Tania</td>
-                            </tr>
-                            <tr>
-                                <td><small>Demo Scheduled</small></td>
-                                <td>Tesla</td>
-                                <td>12 000€</td>
-                                <td>30/04/2017</td>
-                                <td>Mary</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
