@@ -8,8 +8,11 @@ var path           = require('path')
 var passport       = require('passport')
 var config         = require('./config/config.js')
 var passportConfig = require('./config/passport.js')
-var algoliasearch  = require('algoliasearch') 
+var algoliasearch  = require('algoliasearch')
+var http           = require('http').Server(app);
+var io             = require('socket.io')(http);
 
+require('./services/socketService.js')(io);
 
 // configure app to use bodyParser() ===========================================
 // this will let us get the data from a POST ===================================
@@ -32,5 +35,14 @@ app.get('*', function(req, res) {
     res.sendFile('index.html', { root: path.join(__dirname, './public') })
 });
 
-app.listen(8080);
-console.log('Party started at http://localhost:8080');
+// Socket IO (chat etc...)
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+// app.listen(8080);
+
+http.listen(8080, function(){
+  console.log('Party started at http://localhost:8080');
+  console.log('Socket spider listening on anything:8080');
+});

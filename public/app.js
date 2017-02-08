@@ -1,4 +1,4 @@
-var app = angular.module('meanDash', ['ui.router', 'ui.bootstrap']);
+var app = angular.module('meanDash', ['ui.router', 'ui.bootstrap', 'btford.socket-io']);
 
 // For underscore lib
 app.constant('_',
