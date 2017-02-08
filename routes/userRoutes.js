@@ -3,6 +3,7 @@ var userRoutes    = express.Router()
 var path          = require('path')
 var ctrlAuth      = require(path.join(__dirname, '../controllers/authenticationController.js'))
 var ctrlUsers      = require(path.join(__dirname, '../controllers/userController.js'))
+var user          = require(path.join(__dirname, '../models/userModel.js'))
 
 // TODO TODO TODO check before each action if token corresponds to a token in DB
 // Register
@@ -38,7 +39,8 @@ userRoutes.get('/users/:id', function(req,res){
   ctrlUsers.show(id, res)
 });
 
-userRoutes.post('/users/:id/edit', function(req,res){
+//edit user
+userRoutes.put('/users/:id/edit', function(req,res){
   var id = req.params.id
   var data = req.body
   ctrlUsers.edit(id, data, res)
@@ -54,6 +56,12 @@ userRoutes.delete('/users/:id/delete', function(req,res){
 
 userRoutes.put('/users/:id/edit', function(req, res){
 
+})
+
+userRoutes.post('/addrel', function(req,res){
+  var user_id = req.body.user_id
+  var comp_id = req.body.comp_id
+  user.tieUsertoCompany(user_id, comp_id)
 })
 
 module.exports = userRoutes
