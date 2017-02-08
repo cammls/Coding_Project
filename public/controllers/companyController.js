@@ -18,6 +18,12 @@ app.controller('companyCtrl', ['$scope', 'dataService', '$location', '$state','$
     description : "",
     industry : ""
   };
+  $scope.linkedinLink = "https://www.linkedin.com/oauth/v2/authorization"
+  + "?response_type=code"
+  + "&client_id=77vorb23vqewoi"
+  + "&redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Fcompany"
+  + "&state=987654321";
+
   vm.onSubmit = function () {
     dataService
       .createCompany(vm.company_fields)
