@@ -53,11 +53,20 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controller: 'userprofileCtrl',
       controllerAs: 'vm'
     }
-    var companyState = {
+
+    var companyprofileState = {
       name: 'companyprofile',
       url: '/companyprofile',
       templateUrl: '/views/companyprofile.html',
       controller: 'companyprofileCtrl',
+      controllerAs: 'vm'
+    }
+
+    var companylistState = {
+      name: 'companylist',
+      url: '/companylist',
+      templateUrl: '/views/companylist.html',
+      controller: 'companylistCtrl',
       controllerAs: 'vm'
     }
 
@@ -68,7 +77,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
     $stateProvider.state(financeState)
     $stateProvider.state(salesState)
     $stateProvider.state(userprofileState)
-    $stateProvider.state(companyState)
+    $stateProvider.state(companyprofileState)
+    $stateProvider.state(companylistState)
 
     $locationProvider.html5Mode(true)
 
