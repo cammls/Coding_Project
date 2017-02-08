@@ -22,6 +22,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pipedrive": "^3.0.0",
+    "request-promise": "^4.1.1",
     "stripe": "^4.15.0"
   }
 }

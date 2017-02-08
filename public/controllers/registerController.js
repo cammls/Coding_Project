@@ -11,7 +11,8 @@ app.controller('registerCtrl', ['$scope', 'authService', '$location', '$state', 
       authService
         .register(vm.credentials)
         .catch(function(err){
-          console.log(err)
+          console.log(err.message);
+          console.log(err.data);
         })
         .then(function(){
           $state.go('home')
