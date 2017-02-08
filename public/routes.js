@@ -39,11 +39,20 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controllerAs: 'vm'
     }
 
+    var salesState = {
+      name: 'sales',
+      url: '/sales',
+      templateUrl: '/views/sales.html',
+      controller: 'salesCtrl',
+      controllerAs: 'vm'
+    }
+
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
     $stateProvider.state(errorState)
     $stateProvider.state(financeState)
+    $stateProvider.state(salesState)
 
     $locationProvider.html5Mode(true)
 
