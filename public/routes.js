@@ -32,6 +32,14 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controllerAs: 'vm'
     }
 
+    var userprofileState = {
+      name: 'userprofile',
+      url: '/userprofile',
+      templateUrl: '/views/userprofile.html',
+      controller: 'userprofileCtrl',
+      controllerAs: 'vm'
+    }
+
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
