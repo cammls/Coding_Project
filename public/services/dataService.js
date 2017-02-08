@@ -14,8 +14,7 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     }
     })
   }
-<<<<<<< HEAD
-=======
+
 
   var getPipedriveData = function() {
     return $http.get('/api/pipedrive_data', {
@@ -40,7 +39,6 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
   //     console.log(response)
   //   })
   // }
->>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
 
   var getCompanies = function() {
     return $http.get('/api/companies', {
@@ -63,12 +61,9 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
   return {
     getProfile : getProfile,
     getStripeData: getStripeData,
-<<<<<<< HEAD
     getCompanies: getCompanies,
     tieUsertoCompany: tieUsertoCompany,
-    createCompany: createCompany
-
-=======
+    createCompany: createCompany,
     getPipedriveData : getPipedriveData
     // createProduct : createProduct,
     // getProducts : getProducts,
@@ -77,6 +72,5 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     // ratingProduct : ratingProduct,
     // currentRateProduct : currentRateProduct,
     // placeBid : placeBid
->>>>>>> 1f47d3a26e16dcfe71d810fa084a1bd3db91d9c4
   }
 }]);
