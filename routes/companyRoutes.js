@@ -8,7 +8,7 @@ var ctrlCompany   = require(path.join(__dirname, '../controllers/companyControll
 // Create
 companyRoutes.post('/company/new', function (req, res) {
   var company_data = req.body;
-  ctrlCompany.create(company_data);
+  ctrlCompany.create(company_data,res);
   });
 
 // List

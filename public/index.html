@@ -22,6 +22,8 @@
     <script src="/assets/vendor/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="/assets/vendor/assets/bower_components/metisMenu/dist/metisMenu.js"></script>
     <script src="/assets/vendor/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/socket.io-client/dist/socket.io.min.js"></script>
+    <script src="/assets/vendor/assets/bower_components/angular-socket-io/socket.min.js"></script>
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <script src="/assets/js/algolia.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
@@ -29,6 +31,8 @@
     <!-- ANGULAR CUSTOM -->
     <script src="/app.js"></script>
     <script src="/routes.js"></script>
+    <script src="/services/authService.js"></script>
+    <script src="/services/dataService.js"></script>
     <script src="/controllers/mainController.js"></script>
     <script src="/controllers/loginController.js"></script>
     <script src="/controllers/registerController.js"></script>
@@ -36,9 +40,19 @@
     <script src="/controllers/navigationController.js"></script>
     <script src="/controllers/homeController.js"></script>
     <script src="/controllers/financeController.js"></script>
+    <script src="/controllers/logoutController.js"></script>
+    <script src="/controllers/companyController.js"></script>
     <script src="/controllers/salesController.js"></script>
-    <script src="/services/authService.js"></script>
-    <script src="/services/dataService.js"></script>
+    <script src="/controllers/chatController.js"></script>
+    <!-- <script src="/services/authService.js"></script>
+    <script src="/services/dataService.js"></script> -->
+    <script src="/services/messageFormatter.js"></script>
+    <script src="/services/socketService.js"></script>
+
+    <script src="/filters/capitalize.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="/assets/js/chatbox.js"></script>
 </head>
 
 <body ng-app="meanDash">
@@ -55,9 +69,9 @@
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="clear">
                                         <span class="block m-t-xs">
-                                            <strong class="font-bold">David Williams</strong>
+                                            <strong class="font-bold">{{currentUser.first_name}} {{currentUser.last_name}}</strong>
                                         </span>
-                                        <span class="text-muted text-xs block">Chief Executive Officer</span>
+                                        <span class="text-muted text-xs block">{{currentUser.role}}</span>
                                     </span>
                                 </a>
                             </div>
@@ -137,23 +151,23 @@
                                     <li>
                                         <div class="text-center link-block">
                                             <a href="notifications.html">
-                                                <strong>See All Alerts</strong>
-                                                <i class="fa fa-angle-right"></i>
+                                              <strong>See All Alerts</strong>
+                                              <i class="fa fa-angle-right"></i>
                                             </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="login.html">
-                                    <i class="fa fa-sign-out"></i> Log out
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <ui-view></ui-view>
-            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                        <li ng-show="isLoggedIn"><a ui-sref="logout">Logout</a></li>
+                                      <li ng-hide="isLoggedIn"><a ui-sref="login">Login</a></li>
+                                    </ul>
+                                  </nav>
+                                </div>
+                                <ui-view></ui-view>
+              </div>
+          </div>
+        </div>
+        <div ng-controller="chatCtrl">
+          <ng-include src="'/views/shared/chat.html'">
         </div>
     </div>
 </body>

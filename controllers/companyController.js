@@ -20,7 +20,7 @@ var create = function(company_data){
         console.log(content);
       });
 }
-
+    
 var list = function(res){
 	companyModel.list(res);	
 }
@@ -54,4 +54,3 @@ exports.list = list
 exports.create = create
 exports.show = show
 exports.edit = edit
-

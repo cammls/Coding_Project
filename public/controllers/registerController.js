@@ -11,11 +11,10 @@ app.controller('registerCtrl', ['$scope', 'authService', '$location', '$state', 
       authService
         .register(vm.credentials)
         .catch(function(err){
-          console.log(err.message);
-          console.log(err.data);
+          console.log(err)
         })
         .then(function(){
-          $state.go('home')
+          $state.go('createCompany')
         });
     };
 }])

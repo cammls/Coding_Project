@@ -6,8 +6,8 @@ var create = function(company_data,callback){
 	session.run("CREATE(c:Company {name: {name}, description: {description}, industry: {industry}}) RETURN c",
 		{name: company_data.name, description: company_data.description, industry:company_data.industry})
 			.then(function(result){
-				console.log(result.records[0]);
-				callback(result.records.keys);
+				// console.log(result.records[0]);
+				callback(result.records);
 			},function(reason){
 				console.log(reason)
 			});
@@ -49,4 +49,3 @@ exports.create = create;
 exports.list = list;
 exports.show = show;
 exports.edit = edit;
-
