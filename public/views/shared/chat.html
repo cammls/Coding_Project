@@ -1,0 +1,36 @@
+<div id="live-chat" ng-if="isLoggedIn">
+	<header class="clearfix">
+		<a href="#" class="chat-close">x</a>
+		<h4><span>CHANGE BY WHO YOURE TALKING TO</span></h4>
+		<span class="chat-message-counter">3</span>
+	</header>
+
+	<!-- TODO FETCH ALL MSGS COMING FROM THAT CHAT AND DO AN NG-REPEAT -->
+	<div class="chat">
+		<div class="chat-history" ng-if="youreTalkingToMe" >
+
+			<div class="chat-message clearfix" ng-repeat="message in messageLog">
+				<img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
+				<div class="chat-message-content clearfix">
+					<span class="chat-time">{{message.time | date : 'HH:mm'}}</span>
+					<h5>{{ message.source }}</h5>
+					<p>{{ message.message }}</p>
+				</div> <!-- end chat-message-content -->
+			</div> <!-- end chat-message -->
+
+		</div> <!-- end chat-history -->
+		<!-- <p class="chat-feedback">Your partner is typing…</p> -->
+
+		<form role='form' novalidate name='chatform' ng-submit="sendMessage(data.message)">
+			<fieldset>
+
+				<input type="text" placeholder="Type your message…" autofocus ng-max='50' ng-model='data.message'>
+				<button type="submit" class='hidden' ng-enable='form.$valid'></button>
+
+			</fieldset>
+
+		</form>
+
+	</div> <!-- end chat -->
+
+</div> <!-- end live-chat -->
