@@ -5,5 +5,3 @@ app.value('messageFormatter', function(date, nick, message) {
            message + '\n';
 
   });
-
-app.value('nickName', 'anonymous');
