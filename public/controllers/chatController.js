@@ -2,17 +2,15 @@ app.controller('chatCtrl', ['$scope','$log', 'chatSocket', 'messageFormatter', '
 
   if (authService.isLoggedIn()) {
     $scope.isLoggedIn = true
-    $scope.currentUser = authService.currentUser()     
+      $scope.currentUser = authService.currentUser()
   }
   $scope.messageLog = []
   $scope.data = {
     message : ""
   }
 
-
-  // OSEF UN PEU DES NICKNAME, A SETTER SELON LE NOM DU CURRENT USER QUOI
-  $scope.sendMessage = function(message) {
-    chatSocket.emit('message', $scope.userName, message)
+  $scope.sendMessage = function(message) {    
+    chatSocket.emit('message', $scope.currentUser.first_name + " " + $scope.currentUser.last_name , message)
     $scope.data.message = ""
     $scope.youreTalkingToMe = true
   }
@@ -23,6 +21,7 @@ app.controller('chatCtrl', ['$scope','$log', 'chatSocket', 'messageFormatter', '
                 'data', JSON.stringify(data))
      return;
    }
+   console.log(data)
    $scope.$apply(function() {
      newMessageLog = {
       time: new Date(),
