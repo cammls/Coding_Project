@@ -44,6 +44,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       url: '/sales',
       templateUrl: '/views/sales.html',
       controller: 'salesCtrl',
+    }
+
+    var userprofileState = {
+      name: 'userprofile',
+      url: '/userprofile',
+      templateUrl: '/views/userprofile.html',
+      controller: 'userprofileCtrl',
       controllerAs: 'vm'
     }
 
@@ -53,6 +60,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
     $stateProvider.state(errorState)
     $stateProvider.state(financeState)
     $stateProvider.state(salesState)
+    $stateProvider.state(userprofileState)
 
     $locationProvider.html5Mode(true)
 
