@@ -5,13 +5,14 @@ var neo4j          = require('neo4j-driver').v1
 var session        = driver.session()
 var bcrypt         = require('bcrypt-nodejs')
 
-var registerUser = function(user_data, callback) {
+var registerUser = function(user_data, picture_url, callback) {
   // This is not a very secured way, should be hashed and salted
   var hashed_pass = bcrypt.hashSync(user_data.password)
 
-  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password} }) RETURN ID(p), p.first_name, p.last_name, p.email, p.role",
-              {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass })
+  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}, picture: {picture} }) RETURN ID(p), p.first_name, p.last_name, p.email, p.role",
+              {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass, picture: picture_url })
          .then(function(result) {
+              console.log("LOL")
               var record = result.records[0]
               var id = record._fields[0].low
               var first_name = record._fields[1]
@@ -25,10 +26,12 @@ var registerUser = function(user_data, callback) {
                 callback("success", token)
                 session.close()
               }, function(reason) {
+                console.log(reason)
                 callback("failure", "notoken")
                 session.close()
               })
           }, function(reason) {
+              console.log(reason)
               callback("failure", "notoken")
               session.close()
           });
