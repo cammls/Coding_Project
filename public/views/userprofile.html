@@ -7,13 +7,16 @@
             <div class="profile-info">
                 <div class="">
                     <div>
-                        <h2 class="no-margins">
-                            Firstname Lastname
-                        </h2>
-                        <h4>Rôle</h4>
+                      <h2 class="no-margins">
+                        {{User.properties.first_name}} {{User.properties.last_name}}
+                      </h2>
+                      <h4>{{User.properties.role}}</h4>
+                      <button ng-click="Follow()" ng-init="count=0">
+                        Follow
+                      </button>
                     </div>
+                  </div>
                 </div>
-            </div>
         </div>
     </div>
     <div class="row">

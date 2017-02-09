@@ -23,21 +23,6 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     })
   }
 
-  // var createProduct = function(product) {
-  //   var fd = new FormData
-  //   for(var key in product)
-  //     fd.append(key, product[key])
-  //
-  //   return $http.post('/api/products', fd, {
-  //     transformRequest: angular.identity,
-  //     headers: {
-  //       'Content-Type': undefined,
-  //       Authorization: authService.getToken()
-  //     }
-  //   }).then(function(response) {
-  //     console.log(response)
-  //   })
-  // }
 
   var getCompanies = function() {
     return $http.get('/api/companies', {
@@ -48,14 +33,26 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
   }
 
   var tieUsertoCompany = function(user_id, comp_id) {
-    console.log(user_id, comp_id)
     return $http.post('/api/belongs', {user_id: user_id, comp_id: comp_id} )
 
   }
-  var createCompany = function(company) {
-    console.log("data service")
-    return $http.post('/api/company/new', company)
 
+  var follow = function(user_id, id) {
+    return $http.post('/api/follow', {user_id: user_id, id: id})
+  }
+
+  var createCompany = function(company) {
+    return $http.post('/api/company/new', company)
+    }
+
+
+    var showUser = function(id){
+      // console.log(id)
+      return $http.get('/api/user/'+id)
+    }
+
+    var following = function(id){
+      return $http.get('/api/following/'+id)
     }
 
   return {
@@ -64,13 +61,10 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     getCompanies: getCompanies,
     tieUsertoCompany: tieUsertoCompany,
     createCompany: createCompany,
-    getPipedriveData : getPipedriveData
-    // createProduct : createProduct,
-    // getProducts : getProducts,
-    // voteFor : voteFor,
-    // getUserVote : getUserVote,
-    // ratingProduct : ratingProduct,
-    // currentRateProduct : currentRateProduct,
-    // placeBid : placeBid
+    getPipedriveData : getPipedriveData,
+    follow : follow,
+    following : following,
+    showUser: showUser
+
   }
 }]);

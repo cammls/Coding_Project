@@ -61,9 +61,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
 
     var userprofileState = {
       name: 'userprofile',
-      url: '/userprofile',
+      url: '/userprofile/:id',
       templateUrl: '/views/userprofile.html',
-      controller: 'userprofileCtrl',
+      controller: 'userCtrl',
       controllerAs: 'vm'
     }
 
@@ -82,7 +82,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controller: 'companyCtrl',
       controllerAs: 'vm'
     }
-
+    var userlistState = {
+         name: 'userlist',
+         url: '/users',
+         templateUrl: '/views/userlist.html',
+         controller: 'userCtrl',
+         controllerAs: 'vm'
+       }
 
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
@@ -95,7 +101,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
     $stateProvider.state(userprofileState)
     $stateProvider.state(companyprofileState)
     $stateProvider.state(companylistState)
-  
+    $stateProvider.state(userlistState)
+
 
     $locationProvider.html5Mode(true)
 

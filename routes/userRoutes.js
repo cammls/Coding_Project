@@ -34,7 +34,7 @@ userRoutes.get('/users', function (req, res){
 });
 
 // show user
-userRoutes.get('/users/:id', function(req,res){
+userRoutes.get('/user/:id', function(req,res){
   var id= req.params.id
   ctrlUsers.show(id, res)
 });
