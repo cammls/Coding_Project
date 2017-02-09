@@ -15,7 +15,6 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     })
   }
 
-
   var getPipedriveData = function() {
     return $http.get('/api/pipedrive_data', {
       headers: {
@@ -63,7 +62,7 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     getStripeData: getStripeData,
     getCompanies: getCompanies,
     tieUsertoCompany: tieUsertoCompany,
-    createCompany: createCompany,
+    createCompany: createCompany
     getPipedriveData : getPipedriveData
     // createProduct : createProduct,
     // getProducts : getProducts,

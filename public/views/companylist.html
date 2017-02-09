@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content" ng-controller="companyCtrl">
     <!-- END OF FRAME ! Sample Data below -->
     <div class="row">
         <div class="col-lg-12">
@@ -22,11 +22,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr ng-repeat="company in getCompanies">
                                                 <td class="client-avatar"><img alt="image" src="assets/images/a2.jpg"> </td>
-                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">Facebook</a></td>
-                                                <td> Social Network </td>
-                                                <td> Connecting everything </td>
+                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">{{company.name}}</a></td>
+                                                <td> {{company.industry}} </td>
+                                                <td> {{company.description}}</td>
                                                 <td> <a href="#" class="btn btn-primary">Connect</a> </td>
                                             </tr>
                                             <tr>
