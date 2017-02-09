@@ -89,7 +89,7 @@
                         <th>Demos</th>
                       </tr>
                     </thead>
-                    <tbody ng-repeat="deal in pipedriveData.pipedrive_json | filter: {owner_name: 'Vince'}">
+                    <tbody ng-repeat="deal in pipedriveData.pipedrive_json | filter: {status: 'won'} | limitTo: 1">
                       <tr>
                         <td class="client-avatar"><img alt="image" src="assets/images/a2.jpg"> </td>
                         <td><a data-toggle="tab" href="#contact-2" class="client-link">{{ deal.owner_name }}<a/></td>
