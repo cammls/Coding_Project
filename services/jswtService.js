@@ -14,6 +14,7 @@ var generateJswt = function(user_data) {
     first_name: user_data.first_name,
     last_name: user_data.last_name,
     role: user_data.role,
+    picture: user_data.picture,
     exp: parseInt(expiry.getTime() / 1000),
   }, config.secret);
 }

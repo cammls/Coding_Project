@@ -32,17 +32,17 @@ var register = function(user_data, user_picture, res) {
           });
 
           //Adding the user to Algolia's database
-          // index.addObject({
-          //   first_name: user_data.first_name,
-          //   last_name: user_data.last_name,
-          //   email: user_data.email
-          // }, function(err, content) {
-          //   if (err) {
-          //     console.error(err);
-          //     return;
-          //   }
-          //   console.log(content);
-          // });
+          index.addObject({
+            first_name: user_data.first_name,
+            last_name: user_data.last_name,
+            email: user_data.email
+          }, function(err, content) {
+            if (err) {
+              console.error(err);
+              return;
+            }
+            console.log(content);
+          });
 
         } else if (response === "failure" || token === "notoken") {
           res.status(400)
