@@ -2,14 +2,15 @@ var express       = require('express')
 var userRoutes    = express.Router()
 var path          = require('path')
 var ctrlAuth      = require(path.join(__dirname, '../controllers/authenticationController.js'))
-var ctrlUsers      = require(path.join(__dirname, '../controllers/userController.js'))
+var ctrlUsers     = require(path.join(__dirname, '../controllers/userController.js'))
 var user          = require(path.join(__dirname, '../models/userModel.js'))
-
 // TODO TODO TODO check before each action if token corresponds to a token in DB
 // Register
 
 userRoutes.post('/register', function(req, res){
-  var user_data = req.body
+  console.log(req.body)
+  console.log(req.file)
+  return
   ctrlAuth.register(user_data, res)
 });
 

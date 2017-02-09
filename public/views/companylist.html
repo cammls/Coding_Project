@@ -22,11 +22,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="company in getCompanies">
+                                            <tr ng-repeat="company in Companies">
                                                 <td class="client-avatar"><img alt="image" src="assets/images/a2.jpg"> </td>
-                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">{{company.name}}</a></td>
-                                                <td> {{company.industry}} </td>
-                                                <td> {{company.description}}</td>
+                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">{{company._fields[0].properties.name}}</a></td>
+                                                <td> {{company._fields[0].properties.industry}} </td>
+                                                <td> {{company._fields[0].properties.description}}</td>
                                                 <td> <a href="#" class="btn btn-primary">Connect</a> </td>
                                             </tr>
                                             <tr>
