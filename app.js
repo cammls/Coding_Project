@@ -35,6 +35,7 @@ app.get('*', function(req, res) {
     res.sendFile('index.html', { root: path.join(__dirname, './public') })
 });
 
+
 // Socket IO (chat etc...)
 io.on('connection', function(socket){
   console.log('a user connected');
