@@ -63,8 +63,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       name: 'userprofile',
       url: '/userprofile',
       templateUrl: '/views/userprofile.html',
-      controller: 'userprofileCtrl',
-      controllerAs: 'vm'
+      // controller: 'userprofileCtrl',
+      // controllerAs: 'vm'
     }
 
     var companyprofileState = {
@@ -104,7 +104,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
     $stateProvider.state(companyprofileState)
     $stateProvider.state(companylistState)
     $stateProvider.state(userlistState)
-  
+
 
     $locationProvider.html5Mode(true)
 
