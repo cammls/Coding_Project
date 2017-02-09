@@ -23,6 +23,7 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     })
   }
 
+
   // var createProduct = function(product) {
   //   var fd = new FormData
   //   for(var key in product)
@@ -73,12 +74,5 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     tieUsertoCompany: tieUsertoCompany,
     createCompany: createCompany,
     getPipedriveData : getPipedriveData
-    // createProduct : createProduct,
-    // getProducts : getProducts,
-    // voteFor : voteFor,
-    // getUserVote : getUserVote,
-    // ratingProduct : ratingProduct,
-    // currentRateProduct : currentRateProduct,
-    // placeBid : placeBid
   }
 }]);
