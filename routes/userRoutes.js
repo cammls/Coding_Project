@@ -28,6 +28,7 @@ userRoutes.post('/logout', function (req, res) {
 // List all users in json
 
 userRoutes.get('/users', function (req, res){
+  console.log(req.body)  
   ctrlUsers.list(res)
 });
 

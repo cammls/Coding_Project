@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content" ng-controller="userCtrl">
     <!-- END OF FRAME ! Sample Data below -->
-    <div class="row">
+    <div class="row">      
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
@@ -22,13 +22,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="user in Users">
-                                                <td class="client-avatar"><img alt="image" src="assets/images/a2.jpg"> </td>
-                                                <td><a data-toggle="tab" href="#contact-1" class="client-link">{{user._fields[0].properties}}</a></td>
-                                                <td> {{user._fields[0].properties}} </td>
-                                                <td> {{user._fields[0].properties}}</td>
+                                            <tr ng-repeat="user in users">
+                                                <td class="client-avatar"><img alt="image" src="{{user._fields[1]}}"> </td>
+                                                <td>{{user._fields[2]}}</td>
+                                                <td>{{user._fields[3]}}</td>
+                                                <td>{{user._fields[4]}}</td>
                                                 <td> <a href="#" class="btn btn-primary">Connect</a> </td>
-                                            </tr>   
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

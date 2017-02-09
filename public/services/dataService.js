@@ -23,25 +23,8 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     })
   }
 
-
-  // var createProduct = function(product) {
-  //   var fd = new FormData
-  //   for(var key in product)
-  //     fd.append(key, product[key])
-  //
-  //   return $http.post('/api/products', fd, {
-  //     transformRequest: angular.identity,
-  //     headers: {
-  //       'Content-Type': undefined,
-  //       Authorization: authService.getToken()
-  //     }
-  //   }).then(function(response) {
-  //     console.log(response)
-  //   })
-  // }
-
   var getUsers = function() {
-    return $http.get('/api/companies', {
+    return $http.get('/api/users', {
       headers: {
         Authorization: 'Bearer '+ authService.getToken()
     }

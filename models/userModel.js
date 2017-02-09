@@ -111,17 +111,17 @@ var logoutUser = function(user_data, callback) {
 
  var getUsers = function(callback){
    session
-   .run("MATCH (u:User) RETURN u")
+   .run("MATCH (u:User) RETURN u.email, u.picture, u.first_name, u.last_name, u.role, ID(u)")
    .then(function(result){
     // Completed!
     callback(result.records)
     session.close();
-
   })
   .catch(function(error) {
     console.log(error);
   });
  }
+
  var showUser = function(id, callback){
    session
    .run("MATCH (u:User) WHERE ID(u) ={id} RETURN u",{id:  neo4j.int(id)})
@@ -134,6 +134,7 @@ var logoutUser = function(user_data, callback) {
     console.log(error);
   });
  }
+
  var editUser = function(id, data, callback){
   //  TODO GERER PASSWORD
    session
@@ -148,6 +149,7 @@ var logoutUser = function(user_data, callback) {
     console.log(error);
   });
  }
+
  var deleteUser = function(id, callback){
    session
    .run("MATCH (u:User) WHERE ID(u) ={id} DELETE u",{id:  neo4j.int(id)})
@@ -160,6 +162,7 @@ var logoutUser = function(user_data, callback) {
     console.log(error);
   });
  }
+
 exports.registerUser = registerUser
 exports.loginUser = loginUser
 exports.logoutUser = logoutUser

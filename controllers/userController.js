@@ -5,6 +5,7 @@ var index         = client.initIndex('user');
 
 var list = function(res){
   user.getUsers(function(response){
+    console.log(response)
     res.json(response)
   })
 }
