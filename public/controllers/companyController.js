@@ -27,10 +27,11 @@ app.controller('companyCtrl', ['$scope', 'dataService', '$location', '$state','$
   vm.onSubmit = function () {
     dataService
       .createCompany(vm.company_fields)
-      .then(function mySucces(response) {
+      .then(function (response) {
             $scope.comp_id = response.data[0]._fields[0].identity.low;
             dataService.tieUsertoCompany($rootScope.currentUser.id,parseInt($scope.comp_id))
-        }, function myError(error) {
+            $state.go('home')
+        }, function (error) {
             console.error(error.statusText);
         });
   };

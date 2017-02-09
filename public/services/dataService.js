@@ -49,10 +49,11 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
 
   var tieUsertoCompany = function(user_id, comp_id) {
     console.log(user_id, comp_id)
-    return $http.post('/api/addrel', {user_id: user_id, comp_id: comp_id} )
+    return $http.post('/api/belongs', {user_id: user_id, comp_id: comp_id} )
 
   }
   var createCompany = function(company) {
+    console.log("data service")
     return $http.post('/api/company/new', company)
 
     }
@@ -62,7 +63,7 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     getStripeData: getStripeData,
     getCompanies: getCompanies,
     tieUsertoCompany: tieUsertoCompany,
-    createCompany: createCompany
+    createCompany: createCompany,
     getPipedriveData : getPipedriveData
     // createProduct : createProduct,
     // getProducts : getProducts,

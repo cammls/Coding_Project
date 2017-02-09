@@ -10,6 +10,7 @@ var create = function(company_data,callback){
 				callback(result.records);
 			},function(reason){
 				console.log(reason)
+				// res.send(reason)
 			});
 }
 

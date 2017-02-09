@@ -94,18 +94,7 @@ var logoutUser = function(user_data, callback) {
   }
 }
 
- var tieUsertoCompany = function(user_id, company_id)
- {
-   session.run("MATCH (u:User) WHERE ID(u)= {user_id} MATCH (c:Company) WHERE ID(c)={company_id} CREATE (u)-[r:BELONGS_TO]->(c) RETURN u,r,c", {user_id: neo4j.int(user_id), company_id: neo4j.int(company_id)})
-   .then(function(result){
-     console.log(result)
-     // Completed!
-     session.close();
-   })
-   .catch(function(error) {
-     console.log(error);
-   });
- }
+
 
  var getUsers = function(callback){
    session
@@ -165,4 +154,3 @@ exports.getUsers = getUsers
 exports.showUser = showUser
 exports.deleteUser = deleteUser
 exports.editUser = editUser
-exports.tieUsertoCompany = tieUsertoCompany

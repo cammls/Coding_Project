@@ -25,10 +25,12 @@ app.use(passport.initialize())
 var userRoutes      = require('./routes/userRoutes.js')
 var companyRoutes	= require('./routes/companyRoutes.js')
 var apiQueriesRoute = require('./routes/apiQueriesRoute.js')
+var relationsRoutes = require('./routes/relationsRoutes.js')
 
 app.use('/api', companyRoutes)
 app.use('/api', userRoutes)
 app.use('/api', apiQueriesRoute)
+app.use('/api', relationsRoutes)
 
 //-- catch all route to initialize client app --
 app.get('*', function(req, res) {
