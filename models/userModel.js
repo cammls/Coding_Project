@@ -5,12 +5,12 @@ var neo4j          = require('neo4j-driver').v1
 var session        = driver.session()
 var bcrypt         = require('bcrypt-nodejs')
 
-var registerUser = function(user_data, callback) {
+var registerUser = function(user_data, picture_url, callback) {
   // This is not a very secured way, should be hashed and salted
   var hashed_pass = bcrypt.hashSync(user_data.password)
 
-  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password} }) RETURN ID(p), p.first_name, p.last_name, p.email, p.role",
-              {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass })
+  session.run("CREATE (p:User {first_name: {first_name}, last_name: {last_name}, role: {role}, email: {email}, password: {password}, picture: {picture} }) RETURN ID(p), p.first_name, p.last_name, p.email, p.role, p.picture",
+              {first_name: user_data.first_name,last_name: user_data.last_name, email: user_data.email,role: user_data.role, password: hashed_pass, picture: picture_url })
          .then(function(result) {
               var record = result.records[0]
               var id = record._fields[0].low
@@ -18,7 +18,8 @@ var registerUser = function(user_data, callback) {
               var last_name = record._fields[2]
               var email = record._fields[3]
               var role = record._fields[4]
-              var user_data = {id: id, first_name: first_name, last_name: last_name, email: email, role: role }
+              var picture = record._fields[5]
+              var user_data = {id: id, first_name: first_name, last_name: last_name, email: email, role: role, picture: picture }
               var token = jwt.generateJswt(user_data)
               session.close()
               session.run("MATCH (n:User) WHERE ID(n) = {id} SET n.token = {token}", {id: neo4j.int(id), token: token}).then(function(result) {
@@ -38,7 +39,7 @@ var loginUser = function(user_data, callback) {
   // Find user corresponding to email
 
   var user_password = user_data.password
-  session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password, ID(n), n.first_name, n.last_name, n.email, n.role", {email: user_data.email}).then(function(result) {
+  session.run("MATCH (n:User) WHERE n.email = {email} RETURN n.password, ID(n), n.first_name, n.last_name, n.email, n.role, n.picture", {email: user_data.email}).then(function(result) {
     if (result.records[0] === undefined) {
       callback("failure", "notoken")
       session.close()
@@ -55,7 +56,8 @@ var loginUser = function(user_data, callback) {
       var last_name = record._fields[3]
       var email = record._fields[4]
       var role = record._fields[5]
-      var new_user_data = {id: id, first_name: first_name, last_name: last_name, email: email, role: role }
+      var picture = record._fields[6]
+      var new_user_data = {id: id, first_name: first_name, last_name: last_name, email: email, role: role, picture: picture }
       var token = jwt.generateJswt(new_user_data)
       session.close()
       session.run("MATCH (n:User) WHERE ID(n) = {id} SET n.token = {token}", {id: neo4j.int(id), token: token}).then(function(result) {

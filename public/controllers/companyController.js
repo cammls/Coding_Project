@@ -9,7 +9,7 @@ app.controller('companyCtrl', ['$scope', 'dataService', '$location', '$state','$
   }
     // $scope.ChosenCompany=
     $scope.ChooseCompany = function(){
-    dataService.tieUsertoCompany($rootScope.currentUser.id,$scope.ChosenCompany )
+    dataService.tieUsertoCompany($rootScope.currentUser.id,$scope.ChosenCompany)
     $state.go('home')
   }
   var vm = this;

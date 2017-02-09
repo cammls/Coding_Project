@@ -30,6 +30,31 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
       }
       })
     }
+
+  // var createProduct = function(product) {
+  //   var fd = new FormData
+  //   for(var key in product)
+  //     fd.append(key, product[key])
+  //
+  //   return $http.post('/api/products', fd, {
+  //     transformRequest: angular.identity,
+  //     headers: {
+  //       'Content-Type': undefined,
+  //       Authorization: authService.getToken()
+  //     }
+  //   }).then(function(response) {
+  //     console.log(response)
+  //   })
+  // }
+
+  var getUsers = function() {
+    return $http.get('/api/companies', {
+      headers: {
+        Authorization: 'Bearer '+ authService.getToken()
+    }
+    })
+  }
+
   var getCompanies = function() {
     return $http.get('/api/companies', {
       headers: {
@@ -65,13 +90,14 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     getProfile : getProfile,
     getStripeData: getStripeData,
     getCompanies: getCompanies,
+    getUsers: getUsers,
     tieUsertoCompany: tieUsertoCompany,
     createCompany: createCompany,
     getPipedriveData : getPipedriveData,
     follow : follow,
     following : following,
     showUser: showUser,
-    getUsers: getUsers
-
+    getUsers: getUsers,
+    getPipedriveData : getPipedriveData
   }
 }]);

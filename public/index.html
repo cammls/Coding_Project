@@ -49,6 +49,7 @@
     <script src="/services/dataService.js"></script> -->
     <script src="/services/messageFormatter.js"></script>
     <script src="/services/socketService.js"></script>
+    <script src="/directives/fileModel.js"></script>
 
     <script src="/filters/capitalize.js"></script>
 
@@ -60,12 +61,12 @@
     <div id="wrapper" ng-controller="mainCtrl">
         <div class="row border-bottom">
             <nav class="navbar-default navbar-static-side" role="navigation">
-                <div class="sidebar-collapse">
+                <div class="sidebar-collapse" ng-if="currentUser">
                     <ul class="nav metismenu" id="side-menu">
                         <li class="nav-header">
                             <div class="dropdown profile-element">
                                 <span>
-                                    <img alt="image" class="img-circle" src="assets/images/profile_small.jpg" />
+                                    <img alt="image" class="img-circle profilepic" src="{{ currentUser.picture }}" />
                                 </span>
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                     <span class="clear">

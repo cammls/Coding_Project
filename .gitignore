@@ -1,4 +1,5 @@
 node_modules
 public/assets/vendor
 config/config.js
+uploads/
 *.log

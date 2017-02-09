@@ -82,6 +82,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controller: 'companyCtrl',
       controllerAs: 'vm'
     }
+
     var userlistState = {
          name: 'userlist',
          url: '/users',
@@ -89,6 +90,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
          controller: 'userCtrl',
          controllerAs: 'vm'
        }
+
+    var userlistState = {
+      name: 'userlist',
+      url: '/users',
+      templateUrl: '/views/userlist.html',
+      controller: 'userCtrl',
+      controllerAs: 'vm'
+    }
+
 
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)

@@ -9,10 +9,19 @@ var passport       = require('passport')
 var config         = require('./config/config.js')
 var passportConfig = require('./config/passport.js')
 var algoliasearch  = require('algoliasearch')
-var http           = require('http').Server(app);
-var io             = require('socket.io')(http);
+var http           = require('http').Server(app)
+var io             = require('socket.io')(http)
+var cors           = require('cors')
+var multer         = require('multer')
 
+// Socket shit
 require('./services/socketService.js')(io);
+
+// Img upload shit (not safe)
+app.use(multer({dest:'./uploads/'}).single('picture'));
+
+// CORS
+app.use(cors())
 
 // configure app to use bodyParser() ===========================================
 // this will let us get the data from a POST ===================================
