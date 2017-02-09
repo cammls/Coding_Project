@@ -77,9 +77,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
 
     var companylistState = {
       name: 'companylist',
-      url: '/companylist',
+      url: '/companies',
       templateUrl: '/views/companylist.html',
-      controller: 'companylistCtrl',
+      controller: 'companyCtrl',
       controllerAs: 'vm'
     }
 
