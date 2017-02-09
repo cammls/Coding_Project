@@ -1,4 +1,6 @@
-app.controller('userCtrl', ['$scope', 'dataService', '$location', '$state','$rootScope', function($scope,$stateParams, dataService, $location, $state, $rootScope) {
+app.controller('userCtrl', ['$stateParams','$scope', 'dataService', '$location', '$state','$rootScope', function($stateParams,$scope, dataService, $location, $state, $rootScope) {
+    id = $stateParams.id
+    
   $scope.getUsers = function(){
     dataService.getUsers()
     .then(function mySucces(response) {
@@ -9,7 +11,6 @@ app.controller('userCtrl', ['$scope', 'dataService', '$location', '$state','$roo
   }
 
   $scope.showUser = function(){
-    id = "71" // TO CHANGE OF COURSE
      dataService.showUser(id)
      .then(function mySucces(response) {
            $scope.User = response.data[0]._fields[0];
@@ -32,7 +33,9 @@ app.controller('userCtrl', ['$scope', 'dataService', '$location', '$state','$roo
           console.error(error.statusText);
       });
   }
-  
+
   $scope.showUser()
   $scope.Following()
+  console.log($stateParams)
+  console.log("user")
 }])

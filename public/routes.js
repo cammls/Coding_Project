@@ -61,7 +61,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
 
     var userprofileState = {
       name: 'userprofile',
-      url: '/userprofile/:id',
+      url: '/userprofile/{id:int}',
       templateUrl: '/views/userprofile.html',
       controller: 'userCtrl',
       controllerAs: 'vm'
