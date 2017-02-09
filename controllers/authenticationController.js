@@ -3,15 +3,19 @@ var user          = require('../models/userModel.js')
 var test          = require('../services/jswtService.js')
 var config        = require(path.join(__dirname, '../config/config.js'))
 var algoliasearch = require('algoliasearch')
-var client        = algoliasearch('7G7ED6C2ZX', '4901abfb3e83b3d3b6c52cdbd1677f9b');
-var index         = client.initIndex('user');
+var client        = algoliasearch('7G7ED6C2ZX', '4901abfb3e83b3d3b6c52cdbd1677f9b')
+var index         = client.initIndex('user')
+var cloudinary    = require('cloudinary')
 
 // End of to authenticate user before action
 
-var register = function(user_data, res) {
+var register = function(user_data, user_picture, res) {
   // TO DO VALIDATIONS OF USER_DATA (PURPOSE OF A CONTROLLER) !!
+  console.log(user_picture)
+  // TO DO SEND FILE TO CLOUDINARY
+  // AND GET URL
   user.registerUser(user_data, function(response, token) {
-    
+
     if (response === "success") {
       res.status(200)
       res.json({

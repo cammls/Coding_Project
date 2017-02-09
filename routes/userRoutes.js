@@ -8,10 +8,7 @@ var user          = require(path.join(__dirname, '../models/userModel.js'))
 // Register
 
 userRoutes.post('/register', function(req, res){
-  console.log(req.body)
-  console.log(req.file)
-  return
-  ctrlAuth.register(user_data, res)
+  ctrlAuth.register(req.body, req.file, res)
 });
 
 // Login
