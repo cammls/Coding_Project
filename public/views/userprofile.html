@@ -13,9 +13,9 @@
                       <h4>{{User.properties.role}}</h4>
                       <button ng-click="Follow()" ng-init="count=0">
                         Follow
-                      </button>
+                      </button> <br>
                       This user follows:
-                      <div ng-repeat="value in Following"> ... </div>
+                      <div ng-repeat="value in Following"> {{value._fields[0].properties.first_name}} {{value._fields[0].properties.last_name}}</div>
                     </div>
                   </div>
                 </div>

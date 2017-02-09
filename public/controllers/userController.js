@@ -1,6 +1,6 @@
 app.controller('userCtrl', ['$stateParams','$scope', 'dataService', '$location', '$state','$rootScope', function($stateParams,$scope, dataService, $location, $state, $rootScope) {
     id = $stateParams.id
-    
+
   $scope.getUsers = function(){
     dataService.getUsers()
     .then(function mySucces(response) {
@@ -36,6 +36,7 @@ app.controller('userCtrl', ['$stateParams','$scope', 'dataService', '$location',
 
   $scope.showUser()
   $scope.Following()
+  $scope.getUsers()
   console.log($stateParams)
   console.log("user")
 }])

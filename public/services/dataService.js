@@ -23,7 +23,13 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     })
   }
 
-
+  var getUsers = function() {
+      return $http.get('/api/companies', {
+        headers: {
+          Authorization: 'Bearer '+ authService.getToken()
+      }
+      })
+    }
   var getCompanies = function() {
     return $http.get('/api/companies', {
       headers: {
@@ -64,7 +70,8 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     getPipedriveData : getPipedriveData,
     follow : follow,
     following : following,
-    showUser: showUser
+    showUser: showUser,
+    getUsers: getUsers
 
   }
 }]);
