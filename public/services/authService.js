@@ -33,7 +33,8 @@ app.factory('authService',  ['$http', '$window', function($http, $window) {
           email: payload.email,
           first_name: payload.first_name,
           last_name: payload.last_name,
-          role: payload.role
+          role: payload.role,
+          picture: payload.picture
         };
       }
     };
