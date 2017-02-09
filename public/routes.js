@@ -83,6 +83,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
       controllerAs: 'vm'
     }
 
+
     $stateProvider.state(loginState)
     $stateProvider.state(registerState)
     $stateProvider.state(homeState)
@@ -94,7 +95,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $urlM
     $stateProvider.state(userprofileState)
     $stateProvider.state(companyprofileState)
     $stateProvider.state(companylistState)
-    $stateProvider.state(companyState)
+  
 
     $locationProvider.html5Mode(true)
 

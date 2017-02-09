@@ -63,7 +63,6 @@ app.factory('dataService',  ['$http', 'authService', function($http, authService
     getCompanies: getCompanies,
     tieUsertoCompany: tieUsertoCompany,
     createCompany: createCompany
-
     getPipedriveData : getPipedriveData
     // createProduct : createProduct,
     // getProducts : getProducts,
